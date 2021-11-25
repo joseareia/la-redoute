@@ -1,4 +1,4 @@
-# LaRedoute (Concept with 3D products)
+## LaRedoute ~ Concept with 3D products
 
 ### Dependencies
 
@@ -7,7 +7,7 @@ using [npm](https://docs.npmjs.com/getting-started) and build with [webpack](htt
 
 - [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/download/).
 - [Three.js](https://threejs.org/).
-- [barba.js](https://barba.js.org/docs/getstarted/intro/).
+- [barba.js](https://barba.js.org/docs/getstarted/intro/) (Integration with CDN for better performance). 
 - [gsap](https://greensock.com/gsap/).
 - [jquery](https://jquery.com/).
 - [popper.js](https://www.npmjs.com/package/@popperjs/core).
