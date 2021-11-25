@@ -11,14 +11,8 @@ using [npm](https://docs.npmjs.com/getting-started) and build with [webpack](htt
 - [popper.js](https://www.npmjs.com/package/@popperjs/core).
 
 If there is any problem while using the this project, please verify if the following
-libraries are installed.
-
-- autoprefixer
-- css-loader
-- exports-loader
-- node-sass
-- postcss-loader
-- sass-loader
+libraries are installed **autoprefixer**, **css-loader**, **exports-loader**, **node-sass**,
+**postcss-loader**, **sass-loader**.
 
 ## Authors
 
