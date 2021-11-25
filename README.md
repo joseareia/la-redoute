@@ -1,4 +1,6 @@
-## Dependencies
+# LaRedoute (Concept with 3D products)
+
+### Dependencies
 
 This are the following packages used in this project. All of them were installed
 using [npm](https://docs.npmjs.com/getting-started) and build with [webpack](https://webpack.js.org/).
@@ -14,11 +16,11 @@ If there is any problem while using the this project, please verify if the follo
 libraries are installed **autoprefixer**, **css-loader**, **exports-loader**, **node-sass**,
 **postcss-loader**, **sass-loader**.
 
-## Authors
+### Authors
 
 - [Ivo Bispo](https://github.com/ivoafonsobispo), Software Engineer Student
 - [José P. Areia](https://github.com/joseareia), Software Engineer Student
 
-## License
+### License
 
 This project is under the [MIT license](https://opensource.org/licenses/MIT).
