@@ -468,6 +468,76 @@ button[name="read-more"]:hover {
     color: #4e4e4e;
 }
 
+#best-categories {
+    margin-bottom: 12rem;
+}
+
+#best-categories .round-block {
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    width: 22%;
+    height: 13rem;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#best-categories .round-block:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, .15);
+}
+
+#best-categories .round-block[name="man"] {
+    background-image: url('../media/man.png') !important;
+}
+
+#best-categories .round-block[name="woman"] {
+    background-image: url('../media/woman.png') !important;
+}
+
+#best-categories .round-block[name="child"] {
+    background-image: url('../media/child.png') !important;
+}
+
+#best-categories .round-block[name="shoes"] {
+    background-image: url('../media/shoes.png') !important;
+}
+
+#best-categories .round-block span {
+    font-size: 18px;
+    top: 25%;
+    margin-bottom: 0;
+}
+
+#click-collect {
+    margin-bottom: 7rem;
+    background: #fafafa;
+    border-radius: 20px;
+    padding: 2rem 0;
+}
+
+#click-collect span {
+    display: block;
+}
+
+#click-collect .info span:first-child {
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+#click-collect .info span:nth-child(2) {
+    font-size: 14px;
+    color: #4e4e4e;
+}
+
+#click-collect .info a {
+    font-size: 14px;
+    color: #4e4e4e !important;
+}
+
 /* End of General Style */
 /* Begin of Footer Style */
 footer button,
