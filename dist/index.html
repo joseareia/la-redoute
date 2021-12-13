@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/akar-icons-fonts"></script>
 </head>
 
@@ -222,7 +223,7 @@
     </div>
 
     <main class="flex-shrink-0 mt-5 mb-5">
-        <div class="container text-black mt-5 mb-5">
+        <div class="container text-black mt-5 mb-5" id="select-categories">
             <div class="row">
                 <div class="col d-flex" style="align-items: center;">
                     <h5 class="m-0">Selecione uma categoria</h5>
@@ -235,23 +236,145 @@
             </div>
             <div class="row mt-5">
                 <div class="d-flex justify-content-between">
-                    <div class="round-block text-center">
+                    <div class="round-block d-flex align-items-end">
                         <span>Moda</span>
                     </div>
-                    <div class="round-block text-center">
+                    <div class="round-block d-flex align-items-end">
                         <span>Casa</span>
                     </div>
-                    <div class="round-block text-center">
+                    <div class="round-block d-flex align-items-end">
                         <span>Eletrodomésticos</span>
                     </div>
-                    <div class="round-block text-center">
+                    <div class="round-block d-flex align-items-end">
                         <span>Tendências</span>
                     </div>
-                    <div class="round-block text-center">
+                    <div class="round-block d-flex align-items-end">
                         <span>Natal</span>
                     </div>
-                    <div class="round-block text-center">
+                    <div class="round-block d-flex align-items-end">
                         <span>Outlet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-black" id="popular-brands">
+            <div class="row">
+                <div class="col d-flex" style="align-items: center;">
+                    <h5 class="m-0">Marcas mais populares</h5>
+                </div>
+                <div class="col">
+                    <div class="float-end">
+                        <button type="button" name="brand-back" class="me-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ai ai-ChevronLeft">
+                                <path d="M15 4l-8 8 8 8"/>
+                            </svg>
+                        </button>
+                        <button type="button" name="brand-next">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ai ai-ChevronRight">
+                                <path d="M8 4l8 8-8 8"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="d-flex justify-content-between">
+                    <div class="round-block d-flex align-items-end" name="tommy"></div>
+                    <div class="round-block d-flex align-items-end" name="morgan"></div>
+                    <div class="round-block d-flex align-items-end" name="vero"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-black d-flex" id="why-laredoute">
+            <div class="container d-flex">
+                <div class="row" style="width:100% !important;">
+                    <div class="col-3 align-self-center">
+                        <h2>Porquê comprar <br> na <span style="font-weight:600;">La Redoute?</span></h2>
+                        <button type="button" name="read-more" class="mt-3">Saiba mais</button>
+                    </div>
+                    <div class="col-9 align-self-center">
+                        <div class="row d-flex justify-content-around text-center">
+                            <div class="col-4">
+                                <div>
+                                    <div class="circle" name="blue">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ai ai-Search">
+                                            <path d="M21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <br>
+                                <p class="p-title">Pesquisa</p>
+                                <p class="lh-sm">Ipsa architecto voluptas <br> erum voluptas neque ipsam.</p>
+                            </div>
+                            <div class="col-4">
+                                <div>
+                                    <div class="circle" name="yellow">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ai ai-Percentage">
+                                            <path d="M6 21L18 3"/>
+                                            <circle cx="7" cy="6" r="3"/>
+                                            <circle cx="17" cy="18" r="3"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <br>
+                                <p class="p-title">Descontos</p>
+                                <p class="lh-sm">Ipsa architecto voluptas <br> rerum voluptas neque ipsam.</p>
+                            </div>
+                            <div class="col-4">
+                                <div>
+                                    <div class="circle" name="pinkish">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ai ai-Star">
+                                            <path d="M11.074 2.633c.32-.844 1.531-.844 1.852 0l2.07 5.734c.145.38.514.633.926.633h5.087c.94 0 1.35 1.17.611 1.743L18 14a.968.968 0 0 0-.322 1.092L19 20.695c.322.9-.72 1.673-1.508 1.119l-4.917-3.12a1 1 0 0 0-1.15 0l-4.917 3.12c-.787.554-1.83-.22-1.508-1.119l1.322-5.603A.968.968 0 0 0 6 14l-3.62-3.257C1.64 10.17 2.052 9 2.99 9h5.087a.989.989 0 0 0 .926-.633l2.07-5.734z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <br>
+                                <p class="p-title">Qualidade</p>
+                                <p class="lh-sm">Ipsa architecto voluptas <br> rerum voluptas neque ipsam.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-black" id="xmas-collection">
+            <div class="row">
+                <div class="col d-flex flex-wrap" style="align-items: center;">
+                    <h5 class="m-0">Coleção de Natal da La Redoute</h5>
+                    <p style="color:#4e4e4e;" class="mt-3">Voluptatem a autem qui provident. Ipsa est officia fuga quia totam enim ducimus quas. Quidem <br> itaque necessitatibus occaecati at. Corrupti pariatur tempore omnis amet qui.</p>
+                </div>
+                <div class="col">
+                    <div class="float-end">
+                        <button type="button" name="all-categories">Ver toda a coleção</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="d-flex justify-content-between">
+                    <div style="width:100%;">
+                        <div class="round-block" name="p1"></div>
+                        <div class="info-product mt-4">
+                            <span>La Redoute Intérieurs</span>
+                            <span>Toalha estampada em algodão lavado</span>
+                            <span class="mt-2">19<sup>,24</sup>€ <span name="un" style="display:inline !important;">/un</span></span>
+                            <div class="mt-2 stars">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span>(26)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:100%;">
+                        <div class="round-block" name="p2"></div>
+                    </div>
+                    <div style="width:100%;">
+                        <div class="round-block" name="p3"></div>
                     </div>
                 </div>
             </div>

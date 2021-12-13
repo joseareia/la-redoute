@@ -248,8 +248,224 @@ main button[name="all-categories"]:hover {
 }
 
 .round-block span {
-    display: table-cell;
-    vertical-align: bottom;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    margin-bottom: 2rem;
+}
+
+#popular-brands {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}
+
+button[name="brand-back"],
+button[name="brand-next"] {
+    border: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+}
+
+button[name="brand-back"] svg,
+button[name="brand-next"] svg {
+    position: relative;
+    top: -1px;
+}
+
+button[name="brand-back"] {
+    background-color: #f8f8f8;
+    color: black !important;
+}
+
+button[name="brand-next"] {
+    background: rgba(194, 167, 140, .8);
+    color: #fff !important;
+}
+
+button[name="brand-back"]:hover {
+    background-color: #f5f5f5;
+}
+
+button[name="brand-next"]:hover {
+    background: rgba(194, 167, 140, 1);
+}
+
+#popular-brands .round-block {
+    border-radius: 20px;
+    width: 30%;
+    height: 26rem;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#popular-brands .round-block[name="tommy"] {
+    background-image: url('../media/tommy.png') !important;
+}
+
+#popular-brands .round-block[name="morgan"] {
+    background-image: url('../media/morgan.png') !important;
+}
+
+#popular-brands .round-block[name="vero"] {
+    background-image: url('../media/vero.png') !important;
+}
+
+#why-laredoute {
+    width: 100%;
+    height: 25rem;
+    background: #fafafa;
+    overflow-x: hidden;
+    margin-bottom: 10rem;
+}
+
+button[name="read-more"] {
+    background-color: rgba(194, 167, 140, .8);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s ease-in-out;
+}
+
+button[name="read-more"]:hover {
+    background-color: rgba(194, 167, 140, 1);
+}
+
+#why-laredoute .circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+#why-laredoute .circle[name="blue"] {
+    background-color: #D0D4EC;
+    position: relative;
+    right: 5px;
+}
+
+#why-laredoute .circle[name="blue"] svg {
+    position: relative;
+    left: 17px;
+}
+
+#why-laredoute .circle[name="yellow"] {
+    background-color: #F3EACF;
+    position: relative;
+    top: 12px;
+    left: 10px;
+}
+
+#why-laredoute .circle[name="yellow"] svg {
+    position: relative;
+    top: -12px;
+    left: -10px;
+}
+
+
+#why-laredoute .circle[name="pinkish"] {
+    background-color: #FADBD1;
+    position: relative;
+    top: -10px;
+    left: 8px;
+}
+
+#why-laredoute .circle[name="pinkish"] svg {
+    position: relative;
+    top: 10px;
+    left: -8px;
+}
+
+#why-laredoute .p-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+#xmas-collection {
+    margin-bottom: 10rem;
+}
+
+#xmas-collection .round-block {
+    border-radius: 20px;
+    width: 90%;
+    height: 26rem;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#xmas-collection .round-block:hover {
+    box-shadow: none;
+}
+
+#xmas-collection .round-block[name="p1"] {
+    background-image: url('../media/p1.png') !important;
+}
+
+#xmas-collection .round-block[name="p2"] {
+    margin: 0 auto;
+    background-image: url('../media/p2.png') !important;
+}
+
+#xmas-collection .round-block[name="p3"] {
+    float: right;
+    background-image: url('../media/p3.png') !important;
+}
+
+#xmas-collection .info-product span {
+    display: block;
+}
+
+#xmas-collection .info-product span:first-child {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+#xmas-collection .info-product span:nth-child(2) {
+    color: #4e4e4e;
+}
+
+#xmas-collection .info-product span:nth-child(3) {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#xmas-collection .info-product span[name="un"] {
+    color: #000;
+    font-size: 12px;
+}
+
+#xmas-collection .info-product .stars span.fa-star {
+    display: inline !important;
+    color: #c4c4c4;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: .2rem;
+}
+
+#xmas-collection .info-product .stars span.fa-star.checked {
+    color: black;
+}
+
+#xmas-collection .info-product .stars span:last-child {
+    display: inline;
+    font-size: 12px;
+    position: relative;
+    top: -1px;
+    color: #4e4e4e;
 }
 
 /* End of General Style */
