@@ -247,12 +247,16 @@ main button[name="all-categories"]:hover {
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, .15);
 }
 
-.round-block span {
-    left: 50%;
+.round-block .picture-div {
     position: relative;
-    transform: translateX(-50%);
-    margin-bottom: 2rem;
+    top: 40%;
+    transform: translateY(-50%);
 }
+
+/* .round-block span {
+    position: relative;
+    top: 40%;
+} */
 
 #popular-brands {
     margin-top: 10rem;
