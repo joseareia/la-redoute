@@ -211,7 +211,7 @@ nav a:hover {
     right: 0;
 }
 
-main h5 {
+main h4 {
     font-weight: 600;
 }
 
@@ -538,7 +538,77 @@ button[name="read-more"]:hover {
     color: #4e4e4e !important;
 }
 
-/* End of General Style */
+/* End of Index Style */
+
+/* Begin of categories style */
+
+ol.breadcrumb li:not(:last-child) a {
+    text-decoration: none;
+    color: grey;
+}
+
+ol.breadcrumb li:last-child {
+    font-weight: 600;
+}
+
+ol.breadcrumb li:not(:last-child) a:hover {
+    text-decoration: underline;
+    background: none !important;
+}
+
+#banner-promotion {
+    width: 100%;
+    padding: 3rem;
+    background-color: rgba(194, 167, 140, .8);
+    margin-bottom: 8rem;
+    border-radius: 20px;
+}
+
+#banner-promotion .inner-div {
+    padding: 0 4rem;
+    color: white;
+}
+
+#banner-promotion .inner-div h5 {
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+#banner-promotion .inner-div p {
+    width: 58%;
+    font-weight: 600;
+}
+
+button[name="products-3d"] {
+    background-color: #fff;
+    border: none;
+    border-radius: 50px;
+    color: black;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s ease-in-out;
+}
+
+#xmas-collection .round-block[name="p4"] {
+    background-image: url('../media/p4.png') !important;
+}
+
+#xmas-collection .round-block[name="p5"] {
+    margin: 0 auto;
+    background-image: url('../media/p5.png') !important;
+}
+
+#xmas-collection .round-block[name="p6"] {
+    float: right;
+    background-image: url('../media/p6.png') !important;
+}
+
+/* End of categories Style */
+
 /* Begin of Footer Style */
 footer button,
 .sidenav .buttons-sidenav button {
