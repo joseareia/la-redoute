@@ -217,7 +217,7 @@
     </div>
 
     <main class="flex-shrink-0 mt-5">
-        <div class="container text-black mt-3" id="select-categories" style="margin-bottom:8rem;">
+        <div class="container text-black" id="select-categories" style="margin-bottom:8rem;">
             <div class="row">
                 <div class="col d-flex" style="align-items: center;">
                     <h4 class="m-0" style="font-weight:600;">Categorias de móveis</h4>
@@ -265,7 +265,7 @@
                             <span>Casa de banho</span>
                         </div>
                     </div>
-                    <div class="round-block d-flex flex-column text-center">
+                    <div class="round-block d-flex flex-column text-center" name="garden">
                         <div class="d-block picture-div">
                             <img src="media/icon-garden.png" alt="icon-garden" class="mx-auto d-block">
                         </div>
@@ -602,6 +602,10 @@
             $(".sidenav").removeClass('active');
             $(".overlay").removeClass('active');
         });
+
+        $(".round-block[name='garden']").click(function() {
+            $(location).attr("href", "./products-list.html");
+        })
     });
 </script>
 
