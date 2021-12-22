@@ -812,6 +812,255 @@ button[name="btn-show-more"]:hover {
 
 /* End of categories Style */
 
+/* PRODUCT VIEW */
+
+.product-info h6 {
+    font-weight: 600;
+}
+
+.product-info span,
+.product-info span.price {
+    display: block;
+}
+
+.product-info span.price {
+    font-size: 24px;
+    font-weight: 600;
+    position: relative;
+    bottom: 3px;
+}
+
+.product-info span[name="un"] {
+    color: #000;
+    font-size: 12px;
+}
+
+.product-info .stars span.fa-star {
+    display: inline !important;
+    color: #c4c4c4;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: .2rem;
+}
+
+.product-info .stars span.fa-star.checked {
+    color: black;
+}
+
+.product-info .stars span:last-child {
+    display: inline;
+    font-size: 12px;
+    position: relative;
+    top: -1px;
+    color: #4e4e4e;
+}
+
+button[name="juntar-cesto"] {
+    background-color: rgba(194, 167, 140, .8);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    padding: 18px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    transition: .2s ease-in-out;
+    width: 95%;
+}
+
+button[name="juntar-cesto"]:hover {
+    background-color: rgba(194, 167, 140, 1);
+}
+
+button[name="heart"] {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: 50%;
+    color: #000;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    transition: .2s ease-in-out;
+}
+
+.big-pic {
+    background: none !important;
+    width: 65% !important;
+    height: 30rem;
+    position: relative;
+}
+
+.pic {
+    background-image: url('../media/mesa1.png');
+    width: 100% !important;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    left: 9%;
+    transition: .6s ease-in-out;
+    cursor: zoom-in;
+}
+
+.pic:hover {
+    transform: scale(1.1);
+}
+
+.smol-pic li:last-child {
+    list-style: none;
+    width: 5rem;
+}
+
+.smol-pic li:last-child i {
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+
+.smol-pic li:not(:last-child) {
+    list-style: none;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    position: relative;
+    margin-bottom: 1rem;
+    padding: .2rem;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.smol-pic li:not(:last-child):hover {
+    border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.smol-pic li.li-active {
+    border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.smol-pic li .smol-pic-item {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.smol-pic li:first-child .smol-pic-item {
+    background-image: url('../media/mesa1.png');
+}
+
+.smol-pic li:nth-child(2) .smol-pic-item {
+    background-image: url('../media/mesa4.png');
+}
+
+.smol-pic li:nth-child(3) .smol-pic-item {
+    background-image: url('../media/mesa3.png');
+}
+
+.smol-pic li:nth-child(4) .smol-pic-item {
+    background-image: url('../media/mesa2.png');
+}
+
+.smol-pic li:nth-child(5) .smol-pic-item {
+    background-image: url('../media/mesa5.png');
+}
+
+#reviews .stars-general span.fa-star {
+    display: inline !important;
+    color: #c4c4c4;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: .2rem;
+}
+
+#reviews .stars-general span.fa-star.checked {
+    color: black;
+}
+
+#reviews .stars-general span:last-child {
+    display: inline;
+    font-size: 12px;
+    position: relative;
+    top: -1px;
+    color: #4e4e4e;
+}
+
+#reviews .rating-sausage {
+    height: 9px;
+    background-color: #000;
+    border-radius: 10px;
+    position: relative;
+    top: 21%;
+}
+
+#reviews .rating-sausage[name="4"] .div-white-points {
+    width: 150%;
+    height: 9px;
+}
+
+#reviews .rating-sausage[name="5"] .div-white-points {
+    width: 100%;
+    height: 9px;
+}
+
+#reviews .rating-sausage[name="3"] .div-white-points {
+    width: 230%;
+    height: 9px;
+}
+
+#reviews .rating-sausage .white-point {
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+    display: inline-block;
+    position: relative;
+    border-radius: 50%;
+}
+
+#reviews .rating-sausage[name="5"] {
+    width: 90%;
+}
+
+#reviews .rating-sausage[name="4"] {
+    width: 60%;
+}
+
+#reviews .rating-sausage[name="3"] {
+    width: 40%;
+}
+
+
+button[name="related"] {
+    background-color: #f8f8f8;
+    border: none;
+    border-radius: 50px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 14px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s ease-in-out;
+}
+
+button[name="related"]:not(:first-child) {
+    margin-left: 1rem;
+}
+
+button[name="related"]:hover {
+    background-color: #f1f1f1;
+}
+
 /* Begin of Footer Style */
 footer button,
 .sidenav .buttons-sidenav button {
