@@ -1001,6 +1001,16 @@ button[name="heart"] {
     top: 21%;
 }
 
+#reviews .div-white-points {
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 10px;
+}
+
+#reviews .rating-sausage[name="2"] .div-white-points {
+    width: 450%;
+    height: 9px;
+}
+
 #reviews .rating-sausage[name="4"] .div-white-points {
     width: 150%;
     height: 9px;
@@ -1012,7 +1022,7 @@ button[name="heart"] {
 }
 
 #reviews .rating-sausage[name="3"] .div-white-points {
-    width: 230%;
+    width: 214%;
     height: 9px;
 }
 
@@ -1034,7 +1044,37 @@ button[name="heart"] {
 }
 
 #reviews .rating-sausage[name="3"] {
-    width: 40%;
+    width: 42%;
+}
+
+#reviews .rating-sausage[name="2"] {
+    width: 20%;
+}
+
+#reviews .stars-foreach span.fa-star {
+    display: inline !important;
+    color: #c4c4c4;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: .2rem;
+}
+
+#reviews .stars-foreach span.fa-star.checked {
+    color: black;
+}
+
+button[name="more-reviews"] {
+    background: none;
+    border: 1px solid #000;
+    border-radius: 50px;
+    color: #000;
+    padding: 12px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s ease-in-out;
 }
 
 
