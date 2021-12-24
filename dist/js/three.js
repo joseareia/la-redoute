@@ -168,3 +168,13 @@ function loadBackgroundImage(uploaded_image) {
         scene.background = texture;
     })
 }
+
+/* Make Object Bigger */
+document.getElementById('bigger').onclick = function () {
+    scene.scale.multiplyScalar(1.1);
+}
+
+/* Make Object Smaller */
+document.getElementById('smaller').onclick = function () {
+    scene.scale.multiplyScalar(0.9);
+}
