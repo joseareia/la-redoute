@@ -22,7 +22,10 @@ renderer.shadowMap.enabled = true
 camera.position.set(0, 10, 15);
 camera.lookAt(0, 0, 0)
 
+/* Camera Zoom */
 var controls = new THREE.OrbitControls(camera, renderer.domElement)
+controls.minDistance = 10
+controls.maxDistance = 20
 
 var loader = new THREE.GLTFLoader()
 
