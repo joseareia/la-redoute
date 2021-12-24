@@ -178,3 +178,33 @@ document.getElementById('bigger').onclick = function () {
 document.getElementById('smaller').onclick = function () {
     scene.scale.multiplyScalar(0.9);
 }
+
+/* Move Object Up */
+document.getElementById('up').onclick = function () {
+    scene.translateY(1);
+}
+
+/* Move Object Down */
+document.getElementById('down').onclick = function () {
+    scene.translateY(-1);
+}
+
+/* Move Object Right */
+document.getElementById('right').onclick = function () {
+    scene.translateX(1);
+}
+
+/* Move Object Left */
+document.getElementById('left').onclick = function () {
+    scene.translateX(-1);
+}
+
+/* Move Object Left */
+document.getElementById('front').onclick = function () {
+    scene.translateZ(1);
+}
+
+/* Move Object Right */
+document.getElementById('back').onclick = function () {
+    scene.translateZ(-1);
+}
