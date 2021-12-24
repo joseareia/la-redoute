@@ -146,6 +146,25 @@ document.getElementById('open_upper_door').onclick = function () {
 
 /* Animation to close upper door and leg */
 document.getElementById('close_upper_door').onclick = function () {
-    closeDoor(clipUpperDoor)
     closeDoor(clipUpperDoorLeg)
+    closeDoor(clipUpperDoor)
+}
+
+/* Gets the image uploaded */
+var image_input = document.querySelector("#image_input")
+image_input.addEventListener("change", function () {
+    var reader = new FileReader()
+    reader.addEventListener("load", () => {
+        uploaded_image = reader.result
+        loadBackgroundImage(uploaded_image)
+    })
+    reader.readAsDataURL(this.files[0])
+})
+
+/* Add Background Image to Model */
+function loadBackgroundImage(uploaded_image) {
+    var loaderBackground = new THREE.TextureLoader();
+    loaderBackground.load(uploaded_image, function (texture) {
+        scene.background = texture;
+    })
 }
