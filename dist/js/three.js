@@ -38,7 +38,7 @@ controls.addEventListener('change', makeRender)
 
 /* Loads Animation for left door */
 loader.load(
-    '../3d-model/workBenchM.gltf',
+    '3d-model/workBenchM.gltf',
     function (gltf) {
         scene.add(gltf.scene)
 
