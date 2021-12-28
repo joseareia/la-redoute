@@ -1,109 +1,110 @@
-var scene = new THREE.Scene()
-scene.background = new THREE.Color(0xdddddd);
-var camera = new THREE.PerspectiveCamera(70, 1280 / 960, 0.1, 500)
-var canvas = document.getElementById('myCanvas')
-var renderer = new THREE.WebGLRenderer({ canvas: myCanvas })
+/* General config variables */
+let camera, scene, canvas, renderer, controls, clock, mixer;
 
-var clock = new THREE.Clock()
-var mixer = new THREE.AnimationMixer(scene)
+/* Animation variables */
+var leftDoor, rightDoor, upperDoor, upperDoorLeg;
 
-/* Animations */
-var leftDoor = null
-var rightDoor = null
-var upperDoor = null
-var upperDoorLeg = null
+init();
+animate();
 
-/* Sets the size of the canvas */
-renderer.setSize(800, 600)
-renderer.render(scene, camera)
-renderer.shadowMap.enabled = true
+function init() {
+    camera = new THREE.PerspectiveCamera(70, 1280 / 960, 0.1, 500);
+    camera.position.set( -3.75, 4, 13.75 );
+    camera.lookAt( 0, 0, 0 );
 
-/* Sets camera positions */
-camera.position.set(0, 10, 15);
-camera.lookAt(0, 0, 0)
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color( 0xdddddd );
 
-/* Camera Zoom */
-var controls = new THREE.OrbitControls(camera, renderer.domElement)
-controls.minDistance = 10
-controls.maxDistance = 20
+    canvas = document.getElementById( 'product3DCanvas' );
 
-var loader = new THREE.GLTFLoader()
+    new THREE.GLTFLoader()
+        .setPath( '3d-model/' )
+        .load( 'workBenchM.gltf', function ( gltf ) {
+            scene.add( gltf.scene )
 
-function makeRender() {
-    renderer.render(scene, camera)
+            clipLeftDoor = THREE.AnimationClip.findByName( gltf.animations, 'leftDoor' );
+            clipRightDoor = THREE.AnimationClip.findByName( gltf.animations, 'rightDoor' );
+            clipUpperDoor = THREE.AnimationClip.findByName( gltf.animations, 'upperDoor' );
+            clipUpperDoorLeg = THREE.AnimationClip.findByName( gltf.animations, 'upperDoorLeg' );
+        }
+    );
+
+    renderer = new THREE.WebGLRenderer({ canvas: product3DCanvas, antialias: true });
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( 800, 600 );
+    renderer.setViewport( 0, -80, 800, 600 );
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+	renderer.toneMappingExposure = 1;
+	renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.shadowMap.enabled = true;
+
+    clock = new THREE.Clock();
+    mixer = new THREE.AnimationMixer( scene );
+
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls.minDistance = 10;
+    controls.maxDistance = 20;
+    controls.addEventListener( 'change', render );
+
+    /* Scene Lighting */
+    hemiLight = new THREE.HemisphereLight( 0xffeeb1, 0x080820, 4 );
+    scene.add( hemiLight );
+    light = new THREE.SpotLight( 0xffa95c, 4 );
+    light.position.set( -50, 50, 50 );
+    light.castShadow = true;
+    scene.add(light);
+
+    /* Shadows */
+    scene.traverse(n => {
+        if ( n.isMesh ) {
+            n.castShadow = true;
+            n.receiveShadow = true;
+            if ( n.material.map ) n.material.map.anisotropy = 16;
+        }
+    });
+
+    renderer.shadowMap.enabled = true;
+
+    light.shadow.bias = -0.0001;
+    light.shadow.mapSize.width = 1024 * 4;
+    light.shadow.mapSize.height = 1024 * 4;
 }
-makeRender()
 
-controls.addEventListener('change', makeRender)
-
-/* Loads Animation for left door */
-loader.load(
-    '3d-model/workBenchM.gltf',
-    function (gltf) {
-        scene.add(gltf.scene)
-
-        clipLeftDoor = THREE.AnimationClip.findByName(gltf.animations, 'leftDoor')
-        clipRightDoor = THREE.AnimationClip.findByName(gltf.animations, 'rightDoor')
-        clipUpperDoor = THREE.AnimationClip.findByName(gltf.animations, 'upperDoor')
-        clipUpperDoorLeg = THREE.AnimationClip.findByName(gltf.animations, 'upperDoorLeg')
-    }
-)
-
-/* Scene Lighting */
-hemiLight = new THREE.HemisphereLight(0xffeeb1, 0x080820, 4);
-scene.add(hemiLight);
-light = new THREE.SpotLight(0xffa95c, 4);
-light.position.set(-50, 50, 50);
-light.castShadow = true;
-scene.add(light);
-
-/* Shadows */
-scene.traverse(n => {
-    if (n.isMesh) {
-        n.castShadow = true;
-        n.receiveShadow = true;
-        if (n.material.map) n.material.map.anisotropy = 16;
-    }
-});
-
-renderer.shadowMap.enabled = true;
-
-light.shadow.bias = -0.0001;
-light.shadow.mapSize.width = 1024 * 4;
-light.shadow.mapSize.height = 1024 * 4;
-
-/* Starts the animation */
 function animate() {
-    requestAnimationFrame(animate)
-    mixer.update(clock.getDelta())
-    renderer.render(scene, camera)
+    requestAnimationFrame( animate );
+
+    mixer.update( clock.getDelta() );
 
     light.position.set(
         camera.position.x + 10,
         camera.position.y + 10,
         camera.position.z + 10,
     );
+
+    render();
 }
 
-animate()
+function render() {
+    renderer.render( scene, camera );
+}
 
 /* Open Door */
 function openDoor(clip) {
-    leftDoor = mixer.clipAction(clip)
-    leftDoor.reset()
-    leftDoor.timeScale = 1
-    leftDoor.setLoop(THREE.LoopOnce)
-    leftDoor.clampWhenFinished = true
-    leftDoor.play()
+    leftDoor = mixer.clipAction( clip );
+    leftDoor.reset();
+    leftDoor.timeScale = 1;
+    leftDoor.setLoop( THREE.LoopOnce );
+    leftDoor.clampWhenFinished = true;
+    leftDoor.play();
 }
 
 /* Close Door */
 function closeDoor(clip) {
-    leftDoor = mixer.clipAction(clip)
-    leftDoor.paused = false
-    leftDoor.timeScale = -1
-    leftDoor.setLoop(THREE.LoopOnce)
-    leftDoor.play()
+    leftDoor = mixer.clipAction( clip );
+    leftDoor.paused = false;
+    leftDoor.timeScale = -1;
+    leftDoor.setLoop( THREE.LoopOnce );
+    leftDoor.play();
 }
 
 /* Animation to open left door */
