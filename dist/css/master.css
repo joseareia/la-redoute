@@ -372,7 +372,6 @@ button[name="read-more"]:hover {
     left: -10px;
 }
 
-
 #why-laredoute .circle[name="pinkish"] {
     background-color: #FADBD1;
     position: relative;
@@ -539,9 +538,7 @@ button[name="read-more"]:hover {
 }
 
 /* End of Index Style */
-
 /* Begin of categories style */
-
 ol.breadcrumb li:not(:last-child) a {
     text-decoration: none;
     color: grey;
@@ -811,9 +808,7 @@ button[name="btn-show-more"]:hover {
 }
 
 /* End of categories Style */
-
 /* PRODUCT VIEW */
-
 .product-info h6 {
     font-weight: 600;
 }
@@ -973,6 +968,15 @@ button[name="heart"] {
     background-image: url('../media/mesa5.png');
 }
 
+video#video {
+    height: 200px !important;
+    position: absolute;
+    display: inline;
+    z-index: 5;
+    width: auto;
+    opacity: .8;
+}
+
 #reviews .stars-general span.fa-star {
     display: inline !important;
     color: #c4c4c4;
@@ -1076,7 +1080,6 @@ button[name="more-reviews"] {
     font-weight: 600;
     transition: .2s ease-in-out;
 }
-
 
 button[name="related"] {
     background-color: #f8f8f8;
