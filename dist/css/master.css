@@ -908,6 +908,47 @@ button[name="heart"] {
     transform: scale(1.1);
 }
 
+#btn3d {
+    width: 3rem;
+    height: 3rem;
+    background-color: #3B5596;
+    border-radius: 25px;
+    position: absolute;
+    right: -7rem;
+    z-index: 10;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+#btn3d-aux {
+    width: 3rem;
+    height: 3rem;
+    background-color: #2F4478;
+    border-radius: 25px;
+    position: absolute;
+    right: -7rem;
+    z-index: 5;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+#btn3d:hover+#btn3d-aux,
+#btn3d-aux:hover {
+    width: 10rem;
+}
+
+#btn3d-aux a {
+    position: absolute;
+    top: 50%;
+    transform: translate(45%, -50%);
+}
+
+#btn3d span {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .smol-pic li:last-child {
     list-style: none;
     width: 5rem;
