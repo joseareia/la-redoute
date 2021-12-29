@@ -129,6 +129,8 @@ $("#leftDoor").click(function() {
         closeDoor(clipLeftDoor);
         statusLeftDoor = false;
     }
+    if (this.innerHTML=="Porta esquerda - Abrir") this.innerHTML = "Porta esquerda - Fechar";
+    else this.innerHTML = "Porta esquerda - Abrir";
 });
 
 /* Animation to open/close right door */
@@ -140,8 +142,9 @@ $("#rightDoor").click(function() {
         closeDoor(clipRightDoor);
         statusRightDoor = false;
     }
+    if (this.innerHTML=="Porta direita - Abrir") this.innerHTML = "Porta direita - Fechar";
+    else this.innerHTML = "Porta direita - Abrir";
 });
-
 /* Animation to open/close both doors */
 $("#bothDoors").click(function() {
     if (!statusRightDoor && !statusLeftDoor) {
@@ -154,6 +157,20 @@ $("#bothDoors").click(function() {
         closeDoor(clipLeftDoor);
         statusRightDoor = false;
         statusLeftDoor = false;
+    }
+
+    var btnLeftDoor = document.getElementById("leftDoor")
+    var btnRightDoor = document.getElementById("rightDoor")
+    if (this.innerHTML=="Ambas Portas - Fechar"){
+        this.innerHTML = "Ambas Portas - Abrir";
+        btnLeftDoor.innerHTML = "Porta esquerda - Abrir"
+        btnRightDoor.innerHTML = "Porta direita - Abrir"
+    }
+    else 
+    {
+        this.innerHTML = "Ambas Portas - Fechar";
+        btnLeftDoor.innerHTML = "Porta esquerda - Fechar"
+        btnRightDoor.innerHTML = "Porta direita - Fechar"
     }
 });
 
@@ -170,6 +187,8 @@ $("#upperDoor").click(function() {
         statusUpperDoor = false;
         statusLeg = false;
     }
+    if (this.innerHTML=="Apoio de Cima - Fechar") this.innerHTML = "Apoio de Cima - Abrir";
+    else this.innerHTML = "Apoio de Cima - Fechar";
 });
 
 /* Gets the image uploaded */
