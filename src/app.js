@@ -6,4 +6,5 @@ window.barba = require('@barba/core');
 window.$ = require('jquery');
 
 require('three/OrbitControls');
+require('three/TrackballControls');
 require('three/GLTFLoader');
