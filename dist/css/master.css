@@ -1018,6 +1018,25 @@ video#video {
     opacity: .8;
 }
 
+button[name="animations"] {
+    background-color: #f8f8f8;
+    border: none;
+    border-radius: 50px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s ease-in-out;
+}
+
+button[name="animations"]:hover {
+    background-color: #f1f1f1;
+}
+
 #reviews .stars-general span.fa-star {
     display: inline !important;
     color: #c4c4c4;

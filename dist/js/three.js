@@ -1,8 +1,12 @@
 /* General config variables */
-let camera, scene, canvas, renderer, controls, clock, mixer;
+let camera, scene, canvas, renderer, controls, controlsTrack, clock, mixer;
 
 /* Animation variables */
-var leftDoor, rightDoor, upperDoor, upperDoorLeg;
+var doorAnimation;
+var statusLeftDoor = false;
+var statusRightDoor = false;
+var statusUpperDoor = false;
+var statusLeg = false;
 
 init();
 animate();
@@ -13,7 +17,7 @@ function init() {
     camera.lookAt( 0, 0, 0 );
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0xdddddd );
+    scene.background = new THREE.Color( 0xffffff );
 
     canvas = document.getElementById( 'product3DCanvas' );
 
@@ -42,8 +46,28 @@ function init() {
     mixer = new THREE.AnimationMixer( scene );
 
     controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls.enableDamping = true;
+    controls.screenSpacePanning = true;
+
+    controls.enableZoom = false;
+
+    controls.rotateSpeed = 0.5;
+
     controls.minDistance = 10;
     controls.maxDistance = 20;
+
+    controls.target.set( 0, 0.35, 0 );
+
+    controlsTrack = new THREE.TrackballControls( camera, renderer.domElement );
+    controlsTrack.noZoom = false;
+    controlsTrack.noRotate = true;
+    controlsTrack.noPan = true;
+
+    controlsTrack.zoomSpeed = 0.4;
+
+    controlsTrack.minDistance = 10;
+    controlsTrack.maxDistance = 20;
+
     controls.addEventListener( 'change', render );
 
     /* Scene Lighting - Still a Work in progress */
@@ -61,6 +85,15 @@ function animate() {
     requestAnimationFrame( animate );
 
     mixer.update( clock.getDelta() );
+
+    let target = controls.target;
+
+    controls.update();
+
+    controlsTrack.target.set( target.x, target.y, target.z );
+
+    controlsTrack.update();
+
     render();
 }
 
@@ -70,66 +103,74 @@ function render() {
 
 /* Open Door */
 function openDoor(clip) {
-    leftDoor = mixer.clipAction( clip );
-    leftDoor.reset();
-    leftDoor.timeScale = 1;
-    leftDoor.setLoop( THREE.LoopOnce );
-    leftDoor.clampWhenFinished = true;
-    leftDoor.play();
+    doorAnimation = mixer.clipAction( clip );
+    doorAnimation.reset();
+    doorAnimation.timeScale = 1;
+    doorAnimation.setLoop( THREE.LoopOnce );
+    doorAnimation.clampWhenFinished = true;
+    doorAnimation.play();
 }
 
 /* Close Door */
 function closeDoor(clip) {
-    leftDoor = mixer.clipAction( clip );
-    leftDoor.paused = false;
-    leftDoor.timeScale = -1;
-    leftDoor.setLoop( THREE.LoopOnce );
-    leftDoor.play();
+    doorAnimation = mixer.clipAction( clip );
+    doorAnimation.paused = false;
+    doorAnimation.timeScale = -1;
+    doorAnimation.setLoop( THREE.LoopOnce );
+    doorAnimation.play();
 }
 
-/* Animation to open left door */
-document.getElementById('open_left_door').onclick = function () {
-    openDoor(clipLeftDoor)
-}
+/* Animation to open/close left door */
+$("#leftDoor").click(function() {
+    if (!statusLeftDoor) {
+        openDoor(clipLeftDoor);
+        statusLeftDoor = true;
+    } else {
+        closeDoor(clipLeftDoor);
+        statusLeftDoor = false;
+    }
+});
 
-/* Animation to close left door */
-document.getElementById('close_left_door').onclick = function () {
-    closeDoor(clipLeftDoor)
-}
+/* Animation to open/close right door */
+$("#rightDoor").click(function() {
+    if (!statusRightDoor) {
+        openDoor(clipRightDoor);
+        statusRightDoor = true;
+    } else {
+        closeDoor(clipRightDoor);
+        statusRightDoor = false;
+    }
+});
 
-/* Animation to open right door */
-document.getElementById('open_right_door').onclick = function () {
-    openDoor(clipRightDoor)
-}
+/* Animation to open/close both doors */
+$("#bothDoors").click(function() {
+    if (!statusRightDoor && !statusLeftDoor) {
+        openDoor(clipRightDoor);
+        openDoor(clipLeftDoor);
+        statusRightDoor = true;
+        statusLeftDoor = true;
+    } else {
+        closeDoor(clipRightDoor);
+        closeDoor(clipLeftDoor);
+        statusRightDoor = false;
+        statusLeftDoor = false;
+    }
+});
 
-/* Animation to close right door */
-document.getElementById('close_right_door').onclick = function () {
-    closeDoor(clipRightDoor)
-}
-
-/* Animation to open both doors */
-document.getElementById('open_both_doors').onclick = function () {
-    openDoor(clipRightDoor)
-    openDoor(clipLeftDoor)
-}
-
-/* Animation to close both doors */
-document.getElementById('close_both_doors').onclick = function () {
-    closeDoor(clipRightDoor)
-    closeDoor(clipLeftDoor)
-}
-
-/* Animation to open upper door and leg */
-document.getElementById('open_upper_door').onclick = function () {
-    openDoor(clipUpperDoor)
-    openDoor(clipUpperDoorLeg)
-}
-
-/* Animation to close upper door and leg */
-document.getElementById('close_upper_door').onclick = function () {
-    closeDoor(clipUpperDoorLeg)
-    closeDoor(clipUpperDoor)
-}
+/* Animation to open/close upper door and leg */
+$("#upperDoor").click(function() {
+    if (!statusUpperDoor && !statusLeg) {
+        openDoor(clipUpperDoor);
+        openDoor(clipUpperDoorLeg);
+        statusUpperDoor = true;
+        statusLeg = true;
+    } else {
+        closeDoor(clipUpperDoorLeg);
+        closeDoor(clipUpperDoor);
+        statusUpperDoor = false;
+        statusLeg = false;
+    }
+});
 
 /* Gets the image uploaded */
 var image_input = document.querySelector("#image_input")
@@ -190,56 +231,56 @@ document.getElementById('back').onclick = function () {
     scene.translateZ(-1);
 }
 
-/* Hand gestures */
-const modelParams = {
-    flipHorizontal: false,
-    outputStride: 16,
-    imageScaleFactor: 1,
-    maxNumBoxes: 20,
-    iouThreshold: 0.2,
-    scoreThreshold: 0.7,
-    modelType: "ssd320fpnlite",
-    modelSize: "large",
-    bboxLineWidth: "2",
-    fontSize: 17,
-}
-
-const video = document.querySelector('#video');
-
-let model;
-
-navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia;
-
-handTrack.startVideo(video).then(status => {
-    if (status) {
-        navigator.getUserMedia({ video: {} }, stream => {
-                video.sourceObject = stream;
-                setInterval(runDetection, 1000);
-            },
-            err => console.log(err)
-        );
-    }
-});
-
-function runDetection() {
-    model.detect(video).then(predictions => {
-        console.log(predictions);
-        predictions.forEach((p) => {
-            if (p.label == "closed") {
-                scene.translateZ(1);
-            }
-
-            if (p.label == "open") {
-                scene.translateY(-1);
-            }
-
-            if (p.label == "point") {
-                scene.translateY(1);
-            }
-        });
-    });
-}
-
-handTrack.load(modelParams).then(lmodel => {
-    model = lmodel;
-});
+// /* Hand gestures */
+// const modelParams = {
+//     flipHorizontal: false,
+//     outputStride: 16,
+//     imageScaleFactor: 1,
+//     maxNumBoxes: 20,
+//     iouThreshold: 0.2,
+//     scoreThreshold: 0.7,
+//     modelType: "ssd320fpnlite",
+//     modelSize: "large",
+//     bboxLineWidth: "2",
+//     fontSize: 17,
+// }
+//
+// const video = document.querySelector('#video');
+//
+// let model;
+//
+// navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia;
+//
+// handTrack.startVideo(video).then(status => {
+//     if (status) {
+//         navigator.getUserMedia({ video: {} }, stream => {
+//                 video.sourceObject = stream;
+//                 setInterval(runDetection, 1000);
+//             },
+//             err => console.log(err)
+//         );
+//     }
+// });
+//
+// function runDetection() {
+//     model.detect(video).then(predictions => {
+//         console.log(predictions);
+//         predictions.forEach((p) => {
+//             if (p.label == "closed") {
+//                 scene.translateZ(1);
+//             }
+//
+//             if (p.label == "open") {
+//                 scene.translateY(-1);
+//             }
+//
+//             if (p.label == "point") {
+//                 scene.translateY(1);
+//             }
+//         });
+//     });
+// }
+//
+// handTrack.load(modelParams).then(lmodel => {
+//     model = lmodel;
+// });

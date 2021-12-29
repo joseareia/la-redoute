@@ -351,20 +351,26 @@
             <div class="row mt-5">
                 <div class="col-8">
                     <video id="video"></video>
+                    <!-- <div id="overlayProduct3DCanvas" class="text-center text-white py-5 px-4">
+                        <p>Para aproveitar o melhor possível do modelo 3D, leia por favor as seguintes instruções.</p>
+                        <p>1. Para rodar o objecto clique no botão esquerdo do seu rato e movimente o mesmo.</p>
+                        <p>2. Para mover o objecto.</p>
+                        <button type="button" name="acceptInstructions">Exprimentar</button>
+                    </div> -->
                     <canvas id="product3DCanvas"></canvas>
                 </div>
                 <div class="col-4">
                     <!-- Animate Object -->
-                    <h5 class="m-0">Animações</h5>
+                    <h5 class="m-0">Ações (Abrir/Fechar)</h5>
                     <br>
-                    <button id="open_left_door">Open Left Door</button>
-                    <button id="close_left_door">Close Left Door</button>
-                    <button id="open_right_door">Open Right Door</button>
-                    <button id="close_right_door">Close Right Door</button>
-                    <button id="open_both_doors">Open Both Doors</button>
-                    <button id="close_both_doors">Close Both Doors</button>
-                    <button id="open_upper_door">Open Upper Door</button>
-                    <button id="close_upper_door">Close Upper Door</button>
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="leftDoor" name="animations">Porta esquerda</button>
+                            <button id="rightDoor" name="animations">Porta direita</button>
+                            <button id="bothDoors" name="animations">Ambas portas</button>
+                            <button id="upperDoor" name="animations">Apoio de cima</button>
+                        </div>
+                    </div>
                     <hr>
 
                     <!-- Move Object -->
@@ -1125,7 +1131,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"></script>
 <script src="js/main.js"></script>
-<!-- <script src="js/three.js"></script> -->
+<script src="js/three.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -1147,6 +1153,10 @@
         $(".btn[data-bs-toggle='dropdown']").click(function () {
             var c = $(this).find(".ai-chevron-down");
             c.hasClass("rotate") ? c.css("transform", "rotate(0deg)").removeClass("rotate") : c.css("transform", "rotate(180deg)").addClass("rotate");
+        });
+
+        $("button[name='acceptInstructions']").click(function () {
+            $("#overlayProduct3DCanvas").css("display", "none");
         });
     });
 </script>
