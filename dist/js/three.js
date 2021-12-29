@@ -46,41 +46,21 @@ function init() {
     controls.maxDistance = 20;
     controls.addEventListener( 'change', render );
 
-    /* Scene Lighting */
-    hemiLight = new THREE.HemisphereLight( 0xffeeb1, 0x080820, 4 );
-    scene.add( hemiLight );
-    light = new THREE.SpotLight( 0xffa95c, 4 );
-    light.position.set( -50, 50, 50 );
-    light.castShadow = true;
-    scene.add(light);
-
-    /* Shadows */
-    scene.traverse(n => {
-        if ( n.isMesh ) {
-            n.castShadow = true;
-            n.receiveShadow = true;
-            if ( n.material.map ) n.material.map.anisotropy = 16;
-        }
-    });
-
-    renderer.shadowMap.enabled = true;
-
-    light.shadow.bias = -0.0001;
-    light.shadow.mapSize.width = 1024 * 4;
-    light.shadow.mapSize.height = 1024 * 4;
+    /* Scene Lighting - Still a Work in progress */
+    var mainLight = new THREE.PointLight( 0xffffff, 5.0, 28, 2 );
+    mainLight.position.set( 0.418, 16.199, 0.300 );
+    mainLight.add(new THREE.Mesh(new THREE.SphereGeometry(1, 10, 10),new THREE.MeshBasicMaterial({color: 0xFF0000})));
+    scene.add( mainLight );
+    var whitePointLight = new THREE.PointLight(0xffffff)
+    whitePointLight.position.set(0, 2, 0)
+    whitePointLight.add(new THREE.Mesh(new THREE.SphereGeometry(1, 10, 10),new THREE.MeshBasicMaterial({color: 0xFF0000})));
+    scene.add( whitePointLight );
 }
 
 function animate() {
     requestAnimationFrame( animate );
 
     mixer.update( clock.getDelta() );
-
-    light.position.set(
-        camera.position.x + 10,
-        camera.position.y + 10,
-        camera.position.z + 10,
-    );
-
     render();
 }
 
