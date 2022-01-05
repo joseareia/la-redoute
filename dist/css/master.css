@@ -1018,6 +1018,58 @@ video#video {
     opacity: .8;
 }
 
+.options.smol-pic ul {
+    padding: 0;
+    margin: 0;
+}
+
+.options.smol-pic li {
+    list-style: none;
+    width: 4.675rem;
+    height: 4.675rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    position: relative;
+    margin-bottom: 0 !important;
+    padding: .875rem;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    display: inline-block !important;
+}
+
+.options.smol-pic li:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.options.smol-pic li:hover {
+    border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.options.smol-pic li.li-active {
+    border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.options.smol-pic li .smol-pic-item {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.options.smol-pic li:first-child .smol-pic-item {
+    background-image: url('../3d-model/materials/wood1.png');
+}
+
+.options.smol-pic li:nth-child(2) .smol-pic-item {
+    background-image: url('../3d-model/materials/wood2.png');
+}
+
+.options.smol-pic li:nth-child(3) .smol-pic-item {
+    background-image: url('../3d-model/materials/wood3.png');
+}
+
 button[name="animations"] {
     background-color: #f8f8f8;
     border: none;
