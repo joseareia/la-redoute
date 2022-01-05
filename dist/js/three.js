@@ -138,11 +138,25 @@ function closeDoor(clip) {
     doorAnimation.play();
 }
 
-$("#changeTStoneBench").click(function() {
-    stoneBench[0].material.map = t_marble3;
+$("li[color='m-claro']").click(function() {
+    t_marble1 = prepareTexture( t_marble1 );
+    stoneBench[0].material.map = t_marble1;
+    changeActive( $( this ) );
 });
 
-$("div[color='c-escuro']").click(function() {
+$("li[color='m-escuro']").click(function() {
+    t_marble2 = prepareTexture( t_marble2 );
+    stoneBench[0].material.map = t_marble2;
+    changeActive( $( this ) );
+});
+
+$("li[color='m-veryEscuro']").click(function() {
+    t_marble3 = prepareTexture( t_marble3 );
+    stoneBench[0].material.map = t_marble3;
+    changeActive( $( this ) );
+});
+
+$("li[color='c-escuro']").click(function() {
     t_wood1 = prepareTexture( t_wood1 );
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood1;
@@ -150,7 +164,7 @@ $("div[color='c-escuro']").click(function() {
     changeActive( $( this ) );
 });
 
-$("div[color='c-claro']").click(function() {
+$("li[color='c-claro']").click(function() {
     t_wood2 = prepareTexture( t_wood2 );
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood2;
@@ -158,7 +172,7 @@ $("div[color='c-claro']").click(function() {
     changeActive( $( this ) );
 });
 
-$("div[color='c-medio']").click(function() {
+$("li[color='c-medio']").click(function() {
     t_wood3 = prepareTexture( t_wood3 );
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood3;
@@ -175,8 +189,8 @@ function prepareTexture( texture ) {
 }
 
 function changeActive( e ) {
-    $("#options-list").find("li.li-active").removeClass("li-active");
-    $( e ).eq(0).parent().addClass("li-active");
+    $(".options-list").find("li.li-active").removeClass("li-active");
+    $( e ).addClass("li-active");
 }
 
 /* Animation to open/close left door */

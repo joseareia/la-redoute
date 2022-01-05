@@ -1058,16 +1058,28 @@ video#video {
     background-size: cover;
 }
 
-.options.smol-pic li:first-child .smol-pic-item {
+.options.smol-pic[name="cor-mesa"] li:first-child .smol-pic-item {
     background-image: url('../3d-model/materials/wood1.png');
 }
 
-.options.smol-pic li:nth-child(2) .smol-pic-item {
+.options.smol-pic[name="cor-mesa"] li:nth-child(2) .smol-pic-item {
     background-image: url('../3d-model/materials/wood2.png');
 }
 
-.options.smol-pic li:nth-child(3) .smol-pic-item {
+.options.smol-pic[name="cor-mesa"] li:nth-child(3) .smol-pic-item {
     background-image: url('../3d-model/materials/wood3.png');
+}
+
+.options.smol-pic[name="cor-tampo"] li:first-child .smol-pic-item {
+    background-image: url('../3d-model/materials/marble1.jpg');
+}
+
+.options.smol-pic[name="cor-tampo"] li:nth-child(2) .smol-pic-item {
+    background-image: url('../3d-model/materials/marble2.png');
+}
+
+.options.smol-pic[name="cor-tampo"] li:nth-child(3) .smol-pic-item {
+    background-image: url('../3d-model/materials/marble3.png');
 }
 
 button[name="animations"] {
