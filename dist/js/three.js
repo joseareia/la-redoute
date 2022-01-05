@@ -24,14 +24,35 @@ function init() {
     new THREE.GLTFLoader()
         .setPath( '3d-model/' )
         .load( 'workBenchM.gltf', function ( gltf ) {
-            scene.add( gltf.scene )
+            gltfScene = gltf.scene;
+
+            scene.add( gltfScene );
 
             clipLeftDoor = THREE.AnimationClip.findByName( gltf.animations, 'leftDoor' );
             clipRightDoor = THREE.AnimationClip.findByName( gltf.animations, 'rightDoor' );
             clipUpperDoor = THREE.AnimationClip.findByName( gltf.animations, 'upperDoor' );
             clipUpperDoorLeg = THREE.AnimationClip.findByName( gltf.animations, 'upperDoorLeg' );
+
+            stoneBench = $(gltfScene.children).filter(function() {
+                return this.name == "stoneBench";
+            });
+
+            wood =  $(gltfScene.children).filter(function() {
+                return this.name != "stoneBench";
+            });
         }
     );
+
+    /* Import textures */
+    const loaderTexture = new THREE.TextureLoader().setPath( '3d-model/materials/' );
+
+    t_marble1 = loaderTexture.load( 'marble1.jpg' );
+    t_marble2 = loaderTexture.load( 'marble2.png' );
+    t_marble3 = loaderTexture.load( 'marble3.png' );
+
+    t_wood1 = loaderTexture.load( 'wood1.png' );
+    t_wood2 = loaderTexture.load( 'wood2.png' );
+    t_wood3 = loaderTexture.load( 'wood3.png' );
 
     renderer = new THREE.WebGLRenderer({ canvas: product3DCanvas, antialias: true });
     renderer.setPixelRatio( window.devicePixelRatio );
@@ -87,11 +108,8 @@ function animate() {
     mixer.update( clock.getDelta() );
 
     let target = controls.target;
-
     controls.update();
-
     controlsTrack.target.set( target.x, target.y, target.z );
-
     controlsTrack.update();
 
     render();
@@ -118,6 +136,47 @@ function closeDoor(clip) {
     doorAnimation.timeScale = -1;
     doorAnimation.setLoop( THREE.LoopOnce );
     doorAnimation.play();
+}
+
+$("#changeTStoneBench").click(function() {
+    stoneBench[0].material.map = t_marble3;
+});
+
+$("div[color='c-escuro']").click(function() {
+    t_wood1 = prepareTexture( t_wood1 );
+    for (var i = 0; i < wood.length; i++) {
+        wood[i].material.map = t_wood1;
+    }
+    changeActive( $( this ) );
+});
+
+$("div[color='c-claro']").click(function() {
+    t_wood2 = prepareTexture( t_wood2 );
+    for (var i = 0; i < wood.length; i++) {
+        wood[i].material.map = t_wood2;
+    }
+    changeActive( $( this ) );
+});
+
+$("div[color='c-medio']").click(function() {
+    t_wood3 = prepareTexture( t_wood3 );
+    for (var i = 0; i < wood.length; i++) {
+        wood[i].material.map = t_wood3;
+    }
+    changeActive( $( this ) );
+});
+
+function prepareTexture( texture ) {
+    texture.encoding = THREE.sRGBEncoding;
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.flipY = false;
+    return texture;
+}
+
+function changeActive( e ) {
+    $("#options-list").find("li.li-active").removeClass("li-active");
+    $( e ).eq(0).parent().addClass("li-active");
 }
 
 /* Animation to open/close left door */
@@ -166,7 +225,7 @@ $("#bothDoors").click(function() {
         btnLeftDoor.innerHTML = "Porta esquerda - Abrir"
         btnRightDoor.innerHTML = "Porta direita - Abrir"
     }
-    else 
+    else
     {
         this.innerHTML = "Ambas Portas - Fechar";
         btnLeftDoor.innerHTML = "Porta esquerda - Fechar"
