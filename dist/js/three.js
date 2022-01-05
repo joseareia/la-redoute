@@ -13,60 +13,60 @@ animate();
 
 function init() {
     camera = new THREE.PerspectiveCamera(70, 1280 / 960, 0.1, 500);
-    camera.position.set( -3.75, 4, 13.75 );
-    camera.lookAt( 0, 0, 0 );
+    camera.position.set(-3.75, 4, 13.75);
+    camera.lookAt(0, 0, 0);
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0xffffff );
+    scene.background = new THREE.Color(0xffffff);
 
-    canvas = document.getElementById( 'product3DCanvas' );
+    canvas = document.getElementById('product3DCanvas');
 
     new THREE.GLTFLoader()
-        .setPath( '3d-model/' )
-        .load( 'workBenchM.gltf', function ( gltf ) {
+        .setPath('3d-model/')
+        .load('workBenchM.gltf', function (gltf) {
             gltfScene = gltf.scene;
 
-            scene.add( gltfScene );
+            scene.add(gltfScene);
 
-            clipLeftDoor = THREE.AnimationClip.findByName( gltf.animations, 'leftDoor' );
-            clipRightDoor = THREE.AnimationClip.findByName( gltf.animations, 'rightDoor' );
-            clipUpperDoor = THREE.AnimationClip.findByName( gltf.animations, 'upperDoor' );
-            clipUpperDoorLeg = THREE.AnimationClip.findByName( gltf.animations, 'upperDoorLeg' );
+            clipLeftDoor = THREE.AnimationClip.findByName(gltf.animations, 'leftDoor');
+            clipRightDoor = THREE.AnimationClip.findByName(gltf.animations, 'rightDoor');
+            clipUpperDoor = THREE.AnimationClip.findByName(gltf.animations, 'upperDoor');
+            clipUpperDoorLeg = THREE.AnimationClip.findByName(gltf.animations, 'upperDoorLeg');
 
-            stoneBench = $(gltfScene.children).filter(function() {
+            stoneBench = $(gltfScene.children).filter(function () {
                 return this.name == "stoneBench";
             });
 
-            wood =  $(gltfScene.children).filter(function() {
+            wood = $(gltfScene.children).filter(function () {
                 return this.name != "stoneBench";
             });
         }
-    );
+        );
 
     /* Import textures */
-    const loaderTexture = new THREE.TextureLoader().setPath( '3d-model/materials/' );
+    const loaderTexture = new THREE.TextureLoader().setPath('3d-model/materials/');
 
-    t_marble1 = loaderTexture.load( 'marble1.jpg' );
-    t_marble2 = loaderTexture.load( 'marble2.png' );
-    t_marble3 = loaderTexture.load( 'marble3.png' );
+    t_marble1 = loaderTexture.load('marble1.jpg');
+    t_marble2 = loaderTexture.load('marble2.png');
+    t_marble3 = loaderTexture.load('marble3.png');
 
-    t_wood1 = loaderTexture.load( 'wood1.png' );
-    t_wood2 = loaderTexture.load( 'wood2.png' );
-    t_wood3 = loaderTexture.load( 'wood3.png' );
+    t_wood1 = loaderTexture.load('wood1.png');
+    t_wood2 = loaderTexture.load('wood2.png');
+    t_wood3 = loaderTexture.load('wood3.png');
 
     renderer = new THREE.WebGLRenderer({ canvas: product3DCanvas, antialias: true });
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize( 800, 600 );
-    renderer.setViewport( 0, -80, 800, 600 );
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(800, 600);
+    renderer.setViewport(0, -80, 800, 600);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-	renderer.toneMappingExposure = 1;
-	renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMappingExposure = 1;
+    renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.shadowMap.enabled = true;
 
     clock = new THREE.Clock();
-    mixer = new THREE.AnimationMixer( scene );
+    mixer = new THREE.AnimationMixer(scene);
 
-    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.screenSpacePanning = true;
 
@@ -77,9 +77,9 @@ function init() {
     controls.minDistance = 10;
     controls.maxDistance = 20;
 
-    controls.target.set( 0, 0.35, 0 );
+    controls.target.set(0, 0.35, 0);
 
-    controlsTrack = new THREE.TrackballControls( camera, renderer.domElement );
+    controlsTrack = new THREE.TrackballControls(camera, renderer.domElement);
     controlsTrack.noZoom = false;
     controlsTrack.noRotate = true;
     controlsTrack.noPan = true;
@@ -89,98 +89,105 @@ function init() {
     controlsTrack.minDistance = 10;
     controlsTrack.maxDistance = 20;
 
-    controls.addEventListener( 'change', render );
+    controls.addEventListener('change', render);
 
     /* Scene Lighting - Still a Work in progress */
-    var mainLight = new THREE.PointLight( 0xffffff, 5.0, 28, 2 );
-    mainLight.position.set( 0.418, 16.199, 0.300 );
-    mainLight.add(new THREE.Mesh(new THREE.SphereGeometry(1, 10, 10),new THREE.MeshBasicMaterial({color: 0xFF0000})));
-    scene.add( mainLight );
-    var whitePointLight = new THREE.PointLight(0xffffff)
-    whitePointLight.position.set(0, 2, 0)
-    whitePointLight.add(new THREE.Mesh(new THREE.SphereGeometry(1, 10, 10),new THREE.MeshBasicMaterial({color: 0xFF0000})));
-    scene.add( whitePointLight );
+    var pl_left = new THREE.PointLight(0xE6E6DF, 5.0, 28, 2);
+    pl_left.position.set(-7, 14, 7);
+    var pl_right = new THREE.PointLight(0xE6E6DF, 5.0, 28, 2);
+    pl_right.position.set(7, 14, 7);
+    var pl_left_inv = new THREE.PointLight(0xd4d4cf, 5.0, 28, 2);
+    pl_left_inv.position.set(-15, 5, -15);
+    var pl_right_inv = new THREE.PointLight(0xd4d4cf, 5.0, 28, 2);
+    pl_right_inv.position.set(15, 5, -15);
+    var pl_inside = new THREE.PointLight(0xd4d4cf);
+    pl_inside.intensity = 0.3
+    pl_inside.position.set(0, 0, 0);
+
+    scene.add(pl_left, pl_right, pl_left_inv, pl_right_inv, pl_inside);
+
+
 }
 
 function animate() {
-    requestAnimationFrame( animate );
+    requestAnimationFrame(animate);
 
-    mixer.update( clock.getDelta() );
+    mixer.update(clock.getDelta());
 
     let target = controls.target;
     controls.update();
-    controlsTrack.target.set( target.x, target.y, target.z );
+    controlsTrack.target.set(target.x, target.y, target.z);
     controlsTrack.update();
 
     render();
 }
 
 function render() {
-    renderer.render( scene, camera );
+    renderer.render(scene, camera);
 }
 
 /* Open Door */
 function openDoor(clip) {
-    doorAnimation = mixer.clipAction( clip );
+    doorAnimation = mixer.clipAction(clip);
     doorAnimation.reset();
     doorAnimation.timeScale = 1;
-    doorAnimation.setLoop( THREE.LoopOnce );
+    doorAnimation.setLoop(THREE.LoopOnce);
     doorAnimation.clampWhenFinished = true;
     doorAnimation.play();
 }
 
 /* Close Door */
 function closeDoor(clip) {
-    doorAnimation = mixer.clipAction( clip );
+    doorAnimation = mixer.clipAction(clip);
     doorAnimation.paused = false;
     doorAnimation.timeScale = -1;
-    doorAnimation.setLoop( THREE.LoopOnce );
+    doorAnimation.setLoop(THREE.LoopOnce);
     doorAnimation.play();
 }
 
-$("li[color='m-claro']").click(function() {
-    t_marble1 = prepareTexture( t_marble1 );
+$("li[color='m-claro']").click(function () {
+    t_marble1 = prepareTexture(t_marble1);
     stoneBench[0].material.map = t_marble1;
-    changeActive( $( this ) );
+    changeActive($(this));
 });
 
-$("li[color='m-escuro']").click(function() {
-    t_marble2 = prepareTexture( t_marble2 );
+$("li[color='m-escuro']").click(function () {
+    t_marble2 = prepareTexture(t_marble2);
     stoneBench[0].material.map = t_marble2;
-    changeActive( $( this ) );
+    changeActive($(this));
 });
 
-$("li[color='m-veryEscuro']").click(function() {
-    t_marble3 = prepareTexture( t_marble3 );
+$("li[color='m-veryEscuro']").click(function () {
+    t_marble3 = prepareTexture(t_marble3);
     stoneBench[0].material.map = t_marble3;
-    changeActive( $( this ) );
+    changeActive($(this));
 });
 
-$("li[color='c-escuro']").click(function() {
-    t_wood1 = prepareTexture( t_wood1 );
+$("li[color='c-escuro']").click(function () {
+    t_wood1 = prepareTexture(t_wood1);
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood1;
     }
-    changeActive( $( this ) );
+    changeActive($(this));
 });
 
-$("li[color='c-claro']").click(function() {
-    t_wood2 = prepareTexture( t_wood2 );
+$("li[color='c-claro']").click(function () {
+    t_wood2 = prepareTexture(t_wood2);
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood2;
     }
-    changeActive( $( this ) );
+    changeActive($(this));
 });
 
-$("li[color='c-medio']").click(function() {
-    t_wood3 = prepareTexture( t_wood3 );
+$("li[color='c-medio']").click(function () {
+    t_wood3 = prepareTexture(t_wood3);
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood3;
     }
-    changeActive( $( this ) );
+    changeActive($(this));
 });
 
-function prepareTexture( texture ) {
+function prepareTexture(texture) {
     texture.encoding = THREE.sRGBEncoding;
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
@@ -188,13 +195,13 @@ function prepareTexture( texture ) {
     return texture;
 }
 
-function changeActive( e ) {
+function changeActive(e) {
     $(".options-list").find("li.li-active").removeClass("li-active");
-    $( e ).addClass("li-active");
+    $(e).addClass("li-active");
 }
 
 /* Animation to open/close left door */
-$("#leftDoor").click(function() {
+$("#leftDoor").click(function () {
     if (!statusLeftDoor) {
         openDoor(clipLeftDoor);
         statusLeftDoor = true;
@@ -202,12 +209,12 @@ $("#leftDoor").click(function() {
         closeDoor(clipLeftDoor);
         statusLeftDoor = false;
     }
-    if (this.innerHTML=="Porta esquerda - Abrir") this.innerHTML = "Porta esquerda - Fechar";
+    if (this.innerHTML == "Porta esquerda - Abrir") this.innerHTML = "Porta esquerda - Fechar";
     else this.innerHTML = "Porta esquerda - Abrir";
 });
 
 /* Animation to open/close right door */
-$("#rightDoor").click(function() {
+$("#rightDoor").click(function () {
     if (!statusRightDoor) {
         openDoor(clipRightDoor);
         statusRightDoor = true;
@@ -215,11 +222,11 @@ $("#rightDoor").click(function() {
         closeDoor(clipRightDoor);
         statusRightDoor = false;
     }
-    if (this.innerHTML=="Porta direita - Abrir") this.innerHTML = "Porta direita - Fechar";
+    if (this.innerHTML == "Porta direita - Abrir") this.innerHTML = "Porta direita - Fechar";
     else this.innerHTML = "Porta direita - Abrir";
 });
 /* Animation to open/close both doors */
-$("#bothDoors").click(function() {
+$("#bothDoors").click(function () {
     if (!statusRightDoor && !statusLeftDoor) {
         openDoor(clipRightDoor);
         openDoor(clipLeftDoor);
@@ -234,13 +241,12 @@ $("#bothDoors").click(function() {
 
     var btnLeftDoor = document.getElementById("leftDoor")
     var btnRightDoor = document.getElementById("rightDoor")
-    if (this.innerHTML=="Ambas Portas - Fechar"){
+    if (this.innerHTML == "Ambas Portas - Fechar") {
         this.innerHTML = "Ambas Portas - Abrir";
         btnLeftDoor.innerHTML = "Porta esquerda - Abrir"
         btnRightDoor.innerHTML = "Porta direita - Abrir"
     }
-    else
-    {
+    else {
         this.innerHTML = "Ambas Portas - Fechar";
         btnLeftDoor.innerHTML = "Porta esquerda - Fechar"
         btnRightDoor.innerHTML = "Porta direita - Fechar"
@@ -248,7 +254,7 @@ $("#bothDoors").click(function() {
 });
 
 /* Animation to open/close upper door and leg */
-$("#upperDoor").click(function() {
+$("#upperDoor").click(function () {
     if (!statusUpperDoor && !statusLeg) {
         openDoor(clipUpperDoor);
         openDoor(clipUpperDoorLeg);
@@ -260,7 +266,7 @@ $("#upperDoor").click(function() {
         statusUpperDoor = false;
         statusLeg = false;
     }
-    if (this.innerHTML=="Apoio de Cima - Fechar") this.innerHTML = "Apoio de Cima - Abrir";
+    if (this.innerHTML == "Apoio de Cima - Fechar") this.innerHTML = "Apoio de Cima - Abrir";
     else this.innerHTML = "Apoio de Cima - Fechar";
 });
 
