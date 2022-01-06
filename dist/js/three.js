@@ -9,7 +9,8 @@ var statusUpperDoor = false;
 var statusLeg = false;
 
 /* Light Intensity */
-var intensity = 5;
+var pl_left, pl_right, pl_left_inv, pl_right_inv, pl_inside;
+var lightPointsArr = [];
 
 /* Array that contains all the pickable meshes in the scene */
 var pickableMeshes = [];
@@ -109,11 +110,13 @@ function init() {
     controls.addEventListener('change', render);
 
     /* Scene Lighting */
-    var pl_left = new THREE.PointLight(0xE6E6DF, 5.0, 28, 2);
-    var pl_right = new THREE.PointLight(0xE6E6DF, 5.0, 28, 2);
-    var pl_left_inv = new THREE.PointLight(0xd4d4cf, 5.0, 28, 2);
-    var pl_right_inv = new THREE.PointLight(0xd4d4cf, 5.0, 28, 2);
-    var pl_inside = new THREE.PointLight(0xd4d4cf);
+    pl_left = new THREE.PointLight(0xE6E6DF, 5.0, 28, 2);
+    pl_right = new THREE.PointLight(0xE6E6DF, 5.0, 28, 2);
+    pl_left_inv = new THREE.PointLight(0xd4d4cf, 5.0, 28, 2);
+    pl_right_inv = new THREE.PointLight(0xd4d4cf, 5.0, 28, 2);
+    pl_inside = new THREE.PointLight(0xd4d4cf);
+
+    lightPointsArr.push(pl_left, pl_right, pl_left_inv, pl_right_inv, pl_inside);
 
     pl_left.position.set(-7, 14, 9);
     pl_right.position.set(7, 14, 9);
@@ -121,15 +124,13 @@ function init() {
     pl_right_inv.position.set(15, 5, -15);
     pl_inside.position.set(0, 0, 0);
 
-    pl_left.intensity = intensity
-    pl_right.intensity = intensity
-    pl_left_inv.intensity = intensity
-    pl_right_inv.intensity = intensity
-    if (intensity - 4.7 < 0)
-        pl_inside.intensity = 0
-    else
-        pl_inside.intensity = intensity - 4.7
-
+    for (var i = 0; i < lightPointsArr.length; i++) {
+        if (i == lightPointsArr.length - 1) {
+            lightPointsArr[i].intensity = 5 - 4.7;
+        } else {
+            lightPointsArr[i].intensity = 5;
+        }
+    }
 
     scene.add(pl_left, pl_right, pl_left_inv, pl_right_inv, pl_inside);
 
@@ -151,10 +152,19 @@ function init() {
     // });
 }
 
-function sliderChange(val) {
+function sliderChange( val ) {
     document.getElementById('lightIntensityVal').innerHTML = val;
-    intensity = val;
-    init();
+    for (var i = 0; i < lightPointsArr.length; i++) {
+        if (i == lightPointsArr.length - 1) {
+            if (val - 4.7 < 0) {
+                lightPointsArr[i].intensity = 0;
+            } else {
+                lightPointsArr[i].intensity = val - 4.7;
+            }
+        } else {
+            lightPointsArr[i].intensity = val;
+        }
+    }
 }
 
 function animate() {
