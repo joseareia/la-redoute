@@ -154,8 +154,7 @@ function init() {
     // });
 }
 
-function sliderChange(val) {
-    document.getElementById('lightIntensityVal').innerHTML = val;
+function sliderLight(val) {
     for (var i = 0; i < lightPointsArr.length; i++) {
         if (i == lightPointsArr.length - 1) {
             if (val - 4.7 < 0) {
@@ -195,9 +194,12 @@ function getObjects() {
             if (!statusLeftDoor) {
                 openDoor(clipLeftDoor);
                 statusLeftDoor = true;
+                document.getElementById("leftDoor").checked = true;
             } else {
                 closeDoor(clipLeftDoor);
                 statusLeftDoor = false;
+                document.getElementById("leftDoor").checked = false;
+
             }
         }
 
@@ -205,9 +207,11 @@ function getObjects() {
             if (!statusRightDoor) {
                 openDoor(clipRightDoor);
                 statusRightDoor = true;
+                document.getElementById("rightDoor").checked = true;
             } else {
                 closeDoor(clipRightDoor);
                 statusRightDoor = false;
+                document.getElementById("rightDoor").checked = false;
             }
         }
 
@@ -217,11 +221,13 @@ function getObjects() {
                 openDoor(clipUpperDoorLeg);
                 statusUpperDoor = true;
                 statusLeg = true;
+                document.getElementById("upperDoor").checked = true;
             } else {
                 closeDoor(clipUpperDoorLeg);
                 closeDoor(clipUpperDoor);
                 statusUpperDoor = false;
                 statusLeg = false;
+                document.getElementById("upperDoor").checked = false;
             }
         }
     }
@@ -409,14 +415,38 @@ function loadBackgroundImage(uploaded_image) {
     })
 }
 
-/* Make Object Bigger */
-document.getElementById('bigger').onclick = function() {
-    scene.scale.multiplyScalar(1.1);
+/* Make Object Bigger/Smaller */
+var lastVal = 1;
+function sliderScale(val) {
+    if (lastVal > val)
+        scene.scale.multiplyScalar(0.9);
+    else
+        scene.scale.multiplyScalar(1.1);
+    lastVal = val;
 }
 
-/* Make Object Smaller */
-document.getElementById('smaller').onclick = function() {
-    scene.scale.multiplyScalar(0.9);
+/* Move Object Diagonal Top Left */
+document.getElementById('diagonalTopLeft').onclick = function () {
+    scene.translateX(-1);
+    scene.translateY(1);
+}
+
+/* Move Object Diagonal Top Right */
+document.getElementById('diagonalTopRight').onclick = function () {
+    scene.translateX(1);
+    scene.translateY(1);
+}
+
+/* Move Object Diagonal Bottom Left */
+document.getElementById('diagonalBottomLeft').onclick = function () {
+    scene.translateX(-1);
+    scene.translateY(-1);
+}
+
+/* Move Object Diagonal Bottom Right */
+document.getElementById('diagonalBottomRight').onclick = function () {
+    scene.translateX(1);
+    scene.translateY(-1);
 }
 
 /* Move Object Up */
