@@ -15,6 +15,8 @@ var lightPointsArr = [];
 /* Array that contains all the pickable meshes in the scene */
 var pickableMeshes = [];
 
+var hT, hH, wH, wS, triggerBool = false;
+
 init();
 animate();
 
@@ -30,7 +32,7 @@ function init() {
 
     new THREE.GLTFLoader()
         .setPath('3d-model/')
-        .load('workBenchM.gltf', function (gltf) {
+        .load('workBenchM.gltf', function(gltf) {
             gltfScene = gltf.scene;
 
             scene.add(gltfScene);
@@ -40,11 +42,11 @@ function init() {
             clipUpperDoor = THREE.AnimationClip.findByName(gltf.animations, 'upperDoor');
             clipUpperDoorLeg = THREE.AnimationClip.findByName(gltf.animations, 'upperDoorLeg');
 
-            stoneBench = $(gltfScene.children).filter(function () {
+            stoneBench = $(gltfScene.children).filter(function() {
                 return this.name == "stoneBench";
             });
 
-            wood = $(gltfScene.children).filter(function () {
+            wood = $(gltfScene.children).filter(function() {
                 return this.name != "stoneBench";
             });
 
@@ -137,7 +139,7 @@ function init() {
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
 
-    window.onclick = function (e) {
+    window.onclick = function(e) {
         let canvasBounds = canvas.getBoundingClientRect();
         mouse.x = ((e.clientX - canvasBounds.left) / (canvasBounds.right - canvasBounds.left)) * 2 - 1;
         mouse.y = -((event.clientY - canvasBounds.top) / (canvasBounds.bottom - canvasBounds.top)) * 2 + 1;
@@ -152,7 +154,7 @@ function init() {
     // });
 }
 
-function sliderChange( val ) {
+function sliderChange(val) {
     document.getElementById('lightIntensityVal').innerHTML = val;
     for (var i = 0; i < lightPointsArr.length; i++) {
         if (i == lightPointsArr.length - 1) {
@@ -239,25 +241,25 @@ function hoverObjects() {
 }
 
 /* Change texture of the objects */
-$("li[color='m-claro']").click(function () {
+$("li[color='m-claro']").click(function() {
     t_marble1 = prepareTexture(t_marble1);
     stoneBench[0].material.map = t_marble1;
     changeActive($(this));
 });
 
-$("li[color='m-escuro']").click(function () {
+$("li[color='m-escuro']").click(function() {
     t_marble2 = prepareTexture(t_marble2);
     stoneBench[0].material.map = t_marble2;
     changeActive($(this));
 });
 
-$("li[color='m-veryEscuro']").click(function () {
+$("li[color='m-veryEscuro']").click(function() {
     t_marble3 = prepareTexture(t_marble3);
     stoneBench[0].material.map = t_marble3;
     changeActive($(this));
 });
 
-$("li[color='c-escuro']").click(function () {
+$("li[color='c-escuro']").click(function() {
     t_wood1 = prepareTexture(t_wood1);
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood1;
@@ -265,7 +267,7 @@ $("li[color='c-escuro']").click(function () {
     changeActive($(this));
 });
 
-$("li[color='c-claro']").click(function () {
+$("li[color='c-claro']").click(function() {
     t_wood2 = prepareTexture(t_wood2);
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood2;
@@ -273,7 +275,7 @@ $("li[color='c-claro']").click(function () {
     changeActive($(this));
 });
 
-$("li[color='c-medio']").click(function () {
+$("li[color='c-medio']").click(function() {
     t_wood3 = prepareTexture(t_wood3);
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood3;
@@ -314,7 +316,7 @@ function closeDoor(clip) {
 }
 
 /* Animation to open/close left door */
-$("#leftDoor").click(function () {
+$("#leftDoor").click(function() {
     if (!statusLeftDoor) {
         openDoor(clipLeftDoor);
         statusLeftDoor = true;
@@ -327,7 +329,7 @@ $("#leftDoor").click(function () {
 });
 
 /* Animation to open/close right door */
-$("#rightDoor").click(function () {
+$("#rightDoor").click(function() {
     if (!statusRightDoor) {
         openDoor(clipRightDoor);
         statusRightDoor = true;
@@ -339,7 +341,7 @@ $("#rightDoor").click(function () {
     }
 });
 /* Animation to open/close both doors */
-$("#bothDoors").click(function () {
+$("#bothDoors").click(function() {
     if (!statusRightDoor && !statusLeftDoor) {
         openDoor(clipRightDoor);
         openDoor(clipLeftDoor);
@@ -360,7 +362,7 @@ $("#bothDoors").click(function () {
 });
 
 /* Animation to open/close upper door and leg */
-$("#upperDoor").click(function () {
+$("#upperDoor").click(function() {
     if (!statusUpperDoor && !statusLeg) {
         openDoor(clipUpperDoor);
         openDoor(clipUpperDoorLeg);
@@ -376,9 +378,21 @@ $("#upperDoor").click(function () {
     }
 });
 
+/* Scroll modal */
+$(window).scroll(function() {
+    hT = $('#product3DCanvas').offset().top;
+    hH = $('#product3DCanvas').outerHeight();
+    wH = $(window).height();
+    wS = $(this).scrollTop();
+    if (wS > (hT + hH - wH) && (hT > wS) && (wS + wH > hT + hH) && !triggerBool) {
+        $(".btn.btn-primary.btnTriggerModal").click();
+        triggerBool = true;
+    }
+});
+
 /* Gets the image uploaded */
 var image_input = document.querySelector("#image_input")
-image_input.addEventListener("change", function () {
+image_input.addEventListener("change", function() {
     var reader = new FileReader()
     reader.addEventListener("load", () => {
         uploaded_image = reader.result
@@ -390,48 +404,48 @@ image_input.addEventListener("change", function () {
 /* Add Background Image to Model */
 function loadBackgroundImage(uploaded_image) {
     var loaderBackground = new THREE.TextureLoader();
-    loaderBackground.load(uploaded_image, function (texture) {
+    loaderBackground.load(uploaded_image, function(texture) {
         scene.background = texture;
     })
 }
 
 /* Make Object Bigger */
-document.getElementById('bigger').onclick = function () {
+document.getElementById('bigger').onclick = function() {
     scene.scale.multiplyScalar(1.1);
 }
 
 /* Make Object Smaller */
-document.getElementById('smaller').onclick = function () {
+document.getElementById('smaller').onclick = function() {
     scene.scale.multiplyScalar(0.9);
 }
 
 /* Move Object Up */
-document.getElementById('up').onclick = function () {
+document.getElementById('up').onclick = function() {
     scene.translateY(1);
 }
 
 /* Move Object Down */
-document.getElementById('down').onclick = function () {
+document.getElementById('down').onclick = function() {
     scene.translateY(-1);
 }
 
 /* Move Object Right */
-document.getElementById('right').onclick = function () {
+document.getElementById('right').onclick = function() {
     scene.translateX(1);
 }
 
 /* Move Object Left */
-document.getElementById('left').onclick = function () {
+document.getElementById('left').onclick = function() {
     scene.translateX(-1);
 }
 
 /* Move Object Left */
-document.getElementById('front').onclick = function () {
+document.getElementById('front').onclick = function() {
     scene.translateZ(1);
 }
 
 /* Move Object Right */
-document.getElementById('back').onclick = function () {
+document.getElementById('back').onclick = function() {
     scene.translateZ(-1);
 }
 
