@@ -1020,6 +1020,7 @@ video#video {
 
 video#video.hide {
     display: none;
+    z-index: -10;
 }
 
 .options.smol-pic ul {
