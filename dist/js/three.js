@@ -180,6 +180,8 @@ function animate() {
     controlsTrack.target.set(target.x, target.y, target.z);
     controlsTrack.update();
 
+    // if (rotateBaby) gltfScene.rotation.y += .01;
+
     render();
 }
 
@@ -548,9 +550,11 @@ $("#videoGesture").click(function() {
     function runDetection() {
         model.detect(video).then(predictions => {
             predictions.forEach((p) => {
-                if (p.label == "closed") scene.translateZ(1);
+                if (p.label == "closed") scene.translateY(-1);
 
-                if (p.label == "open") scene.translateY(-1);
+                if (p.label == "open") gltfScene.rotation.y += .5;
+
+                if (p.label == "pinch") gltfScene.rotation.y -= .5;
 
                 if (p.label == "point") scene.translateY(1);
 
