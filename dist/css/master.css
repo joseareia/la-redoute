@@ -1087,6 +1087,22 @@ video#video.hide {
     background-image: url('../3d-model/materials/marble3.png');
 }
 
+.options.smol-pic[name="imagem-fundo"] li:first-child .smol-pic-item {
+    background-image: url('../media/linha.png');
+}
+
+.options.smol-pic[name="imagem-fundo"] li:nth-child(2) .smol-pic-item {
+    background-image: url('../media/fundo1.jpg');
+}
+
+.options.smol-pic[name="imagem-fundo"] li:nth-child(3) .smol-pic-item {
+    background-image: url('../media/fundo2.jpg');
+}
+
+.options.smol-pic[name="imagem-fundo"] li:nth-child(4) .smol-pic-item {
+    background-image: url('../media/icon-photo.png');
+}
+
 button[name="animations"] {
     background-color: #f8f8f8;
     border: none;

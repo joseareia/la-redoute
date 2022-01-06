@@ -155,6 +155,7 @@ function init() {
 }
 
 function sliderLight(val) {
+    document.getElementById('lightIntensityVal').innerHTML = val;
     for (var i = 0; i < lightPointsArr.length; i++) {
         if (i == lightPointsArr.length - 1) {
             if (val - 4.7 < 0) {
@@ -248,24 +249,28 @@ function hoverObjects() {
 
 /* Change texture of the objects */
 $("li[color='m-claro']").click(function() {
+    document.getElementById('corTexturaTampoText').innerHTML = "Branco";
     t_marble1 = prepareTexture(t_marble1);
     stoneBench[0].material.map = t_marble1;
     changeActive($(this));
 });
 
 $("li[color='m-escuro']").click(function() {
+    document.getElementById('corTexturaTampoText').innerHTML = "Cinza";
     t_marble2 = prepareTexture(t_marble2);
     stoneBench[0].material.map = t_marble2;
     changeActive($(this));
 });
 
 $("li[color='m-veryEscuro']").click(function() {
+    document.getElementById('corTexturaTampoText').innerHTML = "Preto";
     t_marble3 = prepareTexture(t_marble3);
     stoneBench[0].material.map = t_marble3;
     changeActive($(this));
 });
 
 $("li[color='c-escuro']").click(function() {
+    document.getElementById('corTexturaMesaText').innerHTML = "Castanho escuro";
     t_wood1 = prepareTexture(t_wood1);
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood1;
@@ -274,6 +279,7 @@ $("li[color='c-escuro']").click(function() {
 });
 
 $("li[color='c-claro']").click(function() {
+    document.getElementById('corTexturaMesaText').innerHTML = "Branco";
     t_wood2 = prepareTexture(t_wood2);
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood2;
@@ -282,12 +288,38 @@ $("li[color='c-claro']").click(function() {
 });
 
 $("li[color='c-medio']").click(function() {
+    document.getElementById('corTexturaMesaText').innerHTML = "Castanho";
     t_wood3 = prepareTexture(t_wood3);
     for (var i = 0; i < wood.length; i++) {
         wood[i].material.map = t_wood3;
     }
     changeActive($(this));
 });
+
+$("li[color='transparent']").click(function() {
+    document.getElementById('imagemFundoText').innerHTML = "Transparente";
+    scene.background = new THREE.Color(0xffffff);
+    changeActive($(this));
+});
+
+$("li[color='parede']").click(function() {
+    document.getElementById('imagemFundoText').innerHTML = "Parede";
+    loadBackgroundImage("../media/fundo1.jpg");
+    changeActive($(this));
+});
+
+$("li[color='ivolindo']").click(function() {
+    document.getElementById('imagemFundoText').innerHTML = "Exterior";
+    loadBackgroundImage("../media/fundo2.jpg");
+    changeActive($(this));
+});
+
+$("li[color='photo']").click(function() {
+    document.getElementById('imagemFundoText').innerHTML = "Foto do utilizador";
+    $("#image_input").click();
+    changeActive($(this));
+});
+
 
 function prepareTexture(texture) {
     texture.encoding = THREE.sRGBEncoding;
@@ -391,20 +423,20 @@ $(window).scroll(function() {
     wH = $(window).height();
     wS = $(this).scrollTop();
     if (wS > (hT + hH - wH) && (hT > wS) && (wS + wH > hT + hH) && !triggerBool) {
-        $(".btn.btn-primary.btnTriggerModal").click();
+        // $(".btn.btn-primary.btnTriggerModal").click();
         triggerBool = true;
     }
 });
 
 /* Gets the image uploaded */
-var image_input = document.querySelector("#image_input")
+var image_input = document.querySelector("#image_input");
 image_input.addEventListener("change", function() {
     var reader = new FileReader()
     reader.addEventListener("load", () => {
         uploaded_image = reader.result
-        loadBackgroundImage(uploaded_image)
+        loadBackgroundImage(uploaded_image);
     })
-    reader.readAsDataURL(this.files[0])
+    reader.readAsDataURL(this.files[0]);
 })
 
 /* Add Background Image to Model */
@@ -412,7 +444,7 @@ function loadBackgroundImage(uploaded_image) {
     var loaderBackground = new THREE.TextureLoader();
     loaderBackground.load(uploaded_image, function(texture) {
         scene.background = texture;
-    })
+    });
 }
 
 /* Make Object Bigger/Smaller */

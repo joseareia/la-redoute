@@ -332,12 +332,45 @@
                     <canvas id="product3DCanvas"></canvas>
                 </div>
                 <div class="col-4">
+                    <div class="mb-5">
+                        <a data-bs-toggle="collapse" href="#collapseImagemFundo" role="button" aria-expanded="false" aria-controls="collapseImagemFundo" style="text-decoration:none;">
+                            <div>
+                                <span class="d-inline" style="font-weight:600;color:black;">Imagem de fundo<br>
+                                <span id="imagemFundoText" class="d-inline fw-normal" style="color:#4e4e4e;">Transparente</span>
+                                </span>
+                                <svg class="float-end position-relative fw-bold ai-chevron-down" style="top:-10px;color:black!important;transition:.3s ease-in-out;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M4 9l8 8 8-8"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <div class="collapse" id="collapseImagemFundo">
+                            <div class="options smol-pic mt-3" name="imagem-fundo">
+                                <ul class="options-list">
+                                    <li class="li-active" color="transparent">
+                                        <div class="smol-pic-item"></div>
+                                    </li>
+                                    <li color="parede">
+                                        <div class="smol-pic-item"></div>
+                                    </li>
+                                    <li color="ivolindo">
+                                        <div class="smol-pic-item"></div>
+                                    </li>
+                                    <li color="photo" style="padding: 1.375rem!important;">
+                                        <div class="smol-pic-item"></div>
+                                    </li>
+                                    <input class="d-none" type="file" id="image_input" accept="image/png, image/jpg">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Cor da mesa -->
                     <div class="mb-5">
                         <a data-bs-toggle="collapse" href="#collapseCorMesa" role="button" aria-expanded="false" aria-controls="collapseCorMesa" style="text-decoration:none;">
                             <div>
                                 <span class="d-inline" style="font-weight:600;color:black;">Textura da mesa<br>
-                                    <span class="d-inline fw-normal" style="color:#4e4e4e;">Castanho</span>
+                                <span id="corTexturaMesaText" class="d-inline fw-normal" style="color:#4e4e4e;">Castanho</span>
                                 </span>
                                 <svg class="float-end position-relative fw-bold ai-chevron-down" style="top:-10px;color:black!important;transition:.3s ease-in-out;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -367,7 +400,7 @@
                         <a data-bs-toggle="collapse" href="#collapseCorTampo" role="button" aria-expanded="false" aria-controls="collapseCorTampo" style="text-decoration:none;">
                             <div>
                                 <span class="d-inline" style="font-weight:600;color:black;">Textura do tampo<br>
-                                    <span class="d-inline fw-normal" style="color:#4e4e4e;">Branco</span>
+                                <span id="corTexturaTampoText" class="d-inline fw-normal" style="color:#4e4e4e;">Branco</span>
                                 </span>
                                 <svg class="float-end position-relative fw-bold ai-chevron-down" style="top:-10px;color:black!important;transition:.3s ease-in-out;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -392,127 +425,136 @@
                         </div>
                     </div>
 
-                    <!-- Animate Object -->
-                    <h5 class="m-0">Ações (Abrir/Fechar)</h5>
-                    <br>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-check form-switch" name="animations"
-                                title="Abrir ou Fechar Porta Esquerda">
-                                <input class="form-check-input" type="checkbox" role="switch" id="leftDoor">
-                                <label class="form-check-label" for="leftDoor">Porta esquerda<label>
-                            </div>
-                            <div class="form-check form-switch" name="animations" title="Abrir ou Fechar Porta Direita">
-                                <input class="form-check-input" type="checkbox" role="switch" id="rightDoor">
-                                <label class="form-check-label" for="rightDoor">Porta direita<label>
-                            </div>
-                            <div class="form-check form-switch" name="animations"
-                                title="Abrir ou Fechar Ambas as Portas">
-                                <input class="form-check-input" type="checkbox" role="switch" id="bothDoors">
-                                <label class="form-check-label" for="bothDoors">Ambas as portas<label>
-                            </div>
-                            <div class="form-check form-switch" name="animations" title="Abrir ou Fechar Apoio de Cima">
-                                <input class="form-check-input" type="checkbox" role="switch" id="upperDoor">
-                                <label class="form-check-label" for="upperDoor">Apoio de cima<label>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-
                     <!-- Light Intensity -->
-                    <h5 class="m-0">Luz (Intensidade)</h5>
-                    <br>
-                    <div class="row">
-                        <div class="col-12">
-                            <input type="range" class="form-range" min="0" max="10" step="0.5" id="lightIntensity"
+                    <div class="mb-5">
+                        <span style="font-weight:600;color:black;">Luz (Intensidade)</span><br>
+                        <span id="lightIntensityVal" class="d-inline fw-normal" style="color:#4e4e4e;">5</span>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <input type="range" class="form-range" min="3" max="7" step="0.5" id="lightIntensity"
                                 oninput="sliderLight(this.value)">
+                            </div>
                         </div>
                     </div>
-                    <hr>
 
-                    <!-- Move Object -->
-                    <h5 class="m-0">Mover</h5>
-                    <br>
-                    <svg id="diagonalTopLeft" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        fill="currentColor" class="bi bi-arrow-up-left-square" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" title="Mover para a Diagonal Superior Esquerda"
-                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 8.803a.5.5 0 1 0 .707-.707L6.707 6h2.768a.5.5 0 1 0 0-1H5.5a.5.5 0 0 0-.5.5v3.975a.5.5 0 0 0 1 0V6.707l4.096 4.096z">
-                        </path>
-                    </svg>
-                    <svg id="up" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="bi bi-arrow-up-square" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
-                    </svg>
-                    <svg id="diagonalTopRight" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        fill="currentColor" class="bi bi-arrow-up-right-square" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z" />
-                    </svg>
-                    <br>
-                    <svg id="left" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-app"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z" />
-                    </svg>
-                    <svg id="right" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="bi bi-arrow-right-square" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-                    </svg>
-                    <svg id="front" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="bi bi-plus-square" viewBox="0 0 16 16">
-                        <path
-                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                        <path
-                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                    </svg>
-                    <svg id="back" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="bi bi-dash-square" viewBox="0 0 16 16">
-                        <path
-                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                    </svg>
-                    <br>
-                    <svg id="diagonalBottomLeft" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        fill="currentColor" class="bi bi-arrow-down-left-square" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 3.146a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z" />
-                    </svg>
-                    <svg id="down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-                    </svg>
-                    <svg id="diagonalBottomRight" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        fill="currentColor" class="bi bi-arrow-down-right-square" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 3.146a.5.5 0 1 0-.708.708L9.243 9.95H6.475a.5.5 0 1 0 0 1h3.975a.5.5 0 0 0 .5-.5V6.475a.5.5 0 1 0-1 0v2.768L5.854 5.146z" />
-                    </svg>
-                    <hr>
+                    <div class="mb-5">
+                        <a data-bs-toggle="collapse" href="#collapseAcessibilidade" role="button" aria-expanded="false" aria-controls="collapseAcessibilidade" style="text-decoration:none;">
+                            <div>
+                                <span class="d-inline" style="font-weight:600;color:black;">Ajuda de acessibilidade<br>
+                                    <span class="d-inline fw-normal" style="color:#4e4e4e;">Mais opções</span>
+                                </span>
+                                <svg class="float-end position-relative fw-bold ai-chevron-down" style="top:-10px;color:black!important;transition:.3s ease-in-out;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M4 9l8 8 8-8"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <div class="collapse" id="collapseAcessibilidade">
+                            <div class="mt-4">
+                                <span style="font-weight:600;color:black;">Tamanho (Maior/Menor)</span>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <input type="range" class="form-range" min="0" max="2" step="0.1" id="sliderScale"
+                                            oninput="sliderScale(this.value)">
+                                    </div>
+                                </div>
+                            </div>
 
-                    <!-- Scale Object -->
-                    <h5 class="m-0">Tamanho (Maior/Menor)</h5>
-                    <br>
-                    <div class="row">
-                        <div class="col-12">
-                            <input type="range" class="form-range" min="0" max="2" step="0.1" id="sliderScale"
-                                oninput="sliderScale(this.value)">
+                            <!-- Move Object -->
+                            <div class="mt-3">
+                                <span style="font-weight:600;color:black;">Mover</span>
+                                <div class="mt-2">
+                                    <svg id="diagonalTopLeft" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" class="bi bi-arrow-up-left-square" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" title="Mover para a Diagonal Superior Esquerda"
+                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 8.803a.5.5 0 1 0 .707-.707L6.707 6h2.768a.5.5 0 1 0 0-1H5.5a.5.5 0 0 0-.5.5v3.975a.5.5 0 0 0 1 0V6.707l4.096 4.096z">
+                                        </path>
+                                    </svg>
+                                    <svg id="up" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-arrow-up-square" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+                                    </svg>
+                                    <svg id="diagonalTopRight" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" class="bi bi-arrow-up-right-square" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z" />
+                                    </svg>
+                                    <br>
+                                    <svg id="left" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-app"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z" />
+                                    </svg>
+                                    <svg id="right" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-arrow-right-square" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                                    </svg>
+                                    <svg id="front" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-plus-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                        <path
+                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                    </svg>
+                                    <svg id="back" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-dash-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                                    </svg>
+                                    <br>
+                                    <svg id="diagonalBottomLeft" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" class="bi bi-arrow-down-left-square" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 3.146a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z" />
+                                    </svg>
+                                    <svg id="down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-arrow-down-square" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+                                    </svg>
+                                    <svg id="diagonalBottomRight" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" class="bi bi-arrow-down-right-square" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 3.146a.5.5 0 1 0-.708.708L9.243 9.95H6.475a.5.5 0 1 0 0 1h3.975a.5.5 0 0 0 .5-.5V6.475a.5.5 0 1 0-1 0v2.768L5.854 5.146z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <span class="mt-4" style="font-weight:600;color:black;">Ações (Abrir/Fechar)</span>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div class="form-check form-switch" name="animations"
+                                            title="Abrir ou Fechar Porta Esquerda">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="leftDoor">
+                                            <label class="form-check-label" for="leftDoor">Porta esquerda<label>
+                                        </div>
+                                        <div class="form-check form-switch" name="animations" title="Abrir ou Fechar Porta Direita">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="rightDoor">
+                                            <label class="form-check-label" for="rightDoor">Porta direita<label>
+                                        </div>
+                                        <div class="form-check form-switch" name="animations"
+                                            title="Abrir ou Fechar Ambas as Portas">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="bothDoors">
+                                            <label class="form-check-label" for="bothDoors">Ambas as portas<label>
+                                        </div>
+                                        <div class="form-check form-switch" name="animations" title="Abrir ou Fechar Apoio de Cima">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="upperDoor">
+                                            <label class="form-check-label" for="upperDoor">Apoio de cima<label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <hr>
-
-                    <!-- Image Upload -->
-                    <h5 class="m-0">Fundo</h5>
-                    <br>
-                    <input type="file" id="image_input" accept="image/png, image/jpg">
-                    <br><br>
-                    <button onClick="window.location.reload();">Reiniciar Modelo</button>
                 </div>
             </div>
             <br><br>
@@ -1030,7 +1072,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color:rgba(194, 167, 140, .8)!important;">Vamos experimentar!</button>
+                    <button type="button" class="btn text-white fw-bold" data-bs-dismiss="modal" style="background-color:rgba(194, 167, 140, .8)!important;">Vamos experimentar!</button>
                 </div>
             </div>
         </div>
