@@ -438,8 +438,8 @@
                     <br>
                     <div class="row">
                         <div class="col-12">
-                            <input type="range" class="form-range" min="0" max="10" step="0.5" id="lightIntensity" oninput="sliderChange(this.value)">
-                            <output id="lightIntensityVal"></output>
+                            <input type="range" class="form-range" min="0" max="10" step="0.5" id="lightIntensity"
+                                oninput="sliderLight(this.value)">
                         </div>
                     </div>
                     <hr>
@@ -456,10 +456,14 @@
                     <hr>
 
                     <!-- Scale Object -->
-                    <h5 class="m-0">Tamanho</h5>
+                    <h5 class="m-0">Tamanho (Maior/Menor)</h5>
                     <br>
-                    <button id="bigger">Bigger</button>
-                    <button id="smaller">Smaller</button>
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="range" class="form-range" min="0" max="2" step="0.1" id="sliderScale"
+                                oninput="sliderScale(this.value)">
+                        </div>
+                    </div>
                     <hr>
 
                     <!-- Image Upload -->

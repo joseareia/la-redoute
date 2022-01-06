@@ -152,8 +152,7 @@ function init() {
     // });
 }
 
-function sliderChange( val ) {
-    document.getElementById('lightIntensityVal').innerHTML = val;
+function sliderLight(val) {
     for (var i = 0; i < lightPointsArr.length; i++) {
         if (i == lightPointsArr.length - 1) {
             if (val - 4.7 < 0) {
@@ -395,14 +394,14 @@ function loadBackgroundImage(uploaded_image) {
     })
 }
 
-/* Make Object Bigger */
-document.getElementById('bigger').onclick = function () {
-    scene.scale.multiplyScalar(1.1);
-}
-
-/* Make Object Smaller */
-document.getElementById('smaller').onclick = function () {
-    scene.scale.multiplyScalar(0.9);
+/* Make Object Bigger/Smaller */
+var lastVal = 1;
+function sliderScale(val) {
+    if (lastVal > val)
+        scene.scale.multiplyScalar(0.9);
+    else
+        scene.scale.multiplyScalar(1.1);
+    lastVal = val;
 }
 
 /* Move Object Up */
