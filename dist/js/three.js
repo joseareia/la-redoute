@@ -192,9 +192,12 @@ function getObjects() {
             if (!statusLeftDoor) {
                 openDoor(clipLeftDoor);
                 statusLeftDoor = true;
+                document.getElementById("leftDoor").checked = true;
             } else {
                 closeDoor(clipLeftDoor);
                 statusLeftDoor = false;
+                document.getElementById("leftDoor").checked = false;
+
             }
         }
 
@@ -202,9 +205,11 @@ function getObjects() {
             if (!statusRightDoor) {
                 openDoor(clipRightDoor);
                 statusRightDoor = true;
+                document.getElementById("rightDoor").checked = true;
             } else {
                 closeDoor(clipRightDoor);
                 statusRightDoor = false;
+                document.getElementById("rightDoor").checked = false;
             }
         }
 
@@ -214,11 +219,13 @@ function getObjects() {
                 openDoor(clipUpperDoorLeg);
                 statusUpperDoor = true;
                 statusLeg = true;
+                document.getElementById("upperDoor").checked = true;
             } else {
                 closeDoor(clipUpperDoorLeg);
                 closeDoor(clipUpperDoor);
                 statusUpperDoor = false;
                 statusLeg = false;
+                document.getElementById("upperDoor").checked = false;
             }
         }
     }
