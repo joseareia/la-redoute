@@ -411,6 +411,30 @@ function sliderScale(val) {
     lastVal = val;
 }
 
+/* Move Object Diagonal Top Left */
+document.getElementById('diagonalTopLeft').onclick = function () {
+    scene.translateX(-1);
+    scene.translateY(1);
+}
+
+/* Move Object Diagonal Top Right */
+document.getElementById('diagonalTopRight').onclick = function () {
+    scene.translateX(1);
+    scene.translateY(1);
+}
+
+/* Move Object Diagonal Bottom Left */
+document.getElementById('diagonalBottomLeft').onclick = function () {
+    scene.translateX(-1);
+    scene.translateY(-1);
+}
+
+/* Move Object Diagonal Bottom Right */
+document.getElementById('diagonalBottomRight').onclick = function () {
+    scene.translateX(1);
+    scene.translateY(-1);
+}
+
 /* Move Object Up */
 document.getElementById('up').onclick = function () {
     scene.translateY(1);
@@ -494,3 +518,4 @@ document.getElementById('back').onclick = function () {
 // handTrack.load(modelParams).then(lmodel => {
 //     model = lmodel;
 // });
+
