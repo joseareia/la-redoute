@@ -423,7 +423,7 @@ $(window).scroll(function() {
     wH = $(window).height();
     wS = $(this).scrollTop();
     if (wS > (hT + hH - wH) && (hT > wS) && (wS + wH > hT + hH) && !triggerBool) {
-        // $(".btn.btn-primary.btnTriggerModal").click();
+        $(".btn.btn-primary.btnTriggerModal").click();
         triggerBool = true;
     }
 });
