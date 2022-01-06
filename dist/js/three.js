@@ -17,6 +17,8 @@ var pickableMeshes = [];
 
 var hT, hH, wH, wS, triggerBool = false;
 
+var rotateBaby = false;
+
 init();
 animate();
 
@@ -545,19 +547,14 @@ $("#videoGesture").click(function() {
 
     function runDetection() {
         model.detect(video).then(predictions => {
-            console.log(predictions);
             predictions.forEach((p) => {
-                if (p.label == "closed") {
-                    scene.translateZ(1);
-                }
+                if (p.label == "closed") scene.translateZ(1);
 
-                if (p.label == "open") {
-                    scene.translateY(-1);
-                }
+                if (p.label == "open") scene.translateY(-1);
 
-                if (p.label == "point") {
-                    scene.translateY(1);
-                }
+                if (p.label == "point") scene.translateY(1);
+
+                // rotateBaby = p.label == "open" ? true : false;
             });
         });
     }
