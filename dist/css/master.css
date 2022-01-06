@@ -1009,6 +1009,45 @@ button[name="heart"] {
     background-image: url('../media/mesa5.png');
 }
 
+.videoG {
+    bottom: 7rem;
+    position: relative;
+}
+
+.videoGCircle {
+    width: 3rem;
+    height: 3rem;
+    background-color: #3B5596;
+    border-radius: 25px;
+    position: relative;
+    z-index: 10;
+    color: white;
+    cursor: pointer;
+}
+
+.videoGCircle svg {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.videoGCircleAux {
+    width: 26rem;
+    height: 3rem;
+    background-color: #2F4478;
+    border-radius: 25px;
+    position: absolute;
+    z-index: 5;
+    color: white;
+    cursor: pointer;
+}
+
+.videoGCircleAux p {
+    position: absolute;
+    top: 50%;
+    transform: translate(10%, -50%);
+}
+
 video#video {
     height: 200px !important;
     position: absolute;

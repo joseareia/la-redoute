@@ -511,56 +511,59 @@ document.getElementById('back').onclick = function() {
     scene.translateZ(-1);
 }
 
-// /* Hand gestures */
-// const modelParams = {
-//     flipHorizontal: false,
-//     outputStride: 16,
-//     imageScaleFactor: 1,
-//     maxNumBoxes: 20,
-//     iouThreshold: 0.2,
-//     scoreThreshold: 0.7,
-//     modelType: "ssd320fpnlite",
-//     modelSize: "large",
-//     bboxLineWidth: "2",
-//     fontSize: 17,
-// }
-//
-// const video = document.querySelector('#video');
-//
-// let model;
-//
-// navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia;
-//
-// handTrack.startVideo(video).then(status => {
-//     if (status) {
-//         navigator.getUserMedia({ video: {} }, stream => {
-//                 video.sourceObject = stream;
-//                 setInterval(runDetection, 1000);
-//             },
-//             err => console.log(err)
-//         );
-//     }
-// });
-//
-// function runDetection() {
-//     model.detect(video).then(predictions => {
-//         console.log(predictions);
-//         predictions.forEach((p) => {
-//             if (p.label == "closed") {
-//                 scene.translateZ(1);
-//             }
-//
-//             if (p.label == "open") {
-//                 scene.translateY(-1);
-//             }
-//
-//             if (p.label == "point") {
-//                 scene.translateY(1);
-//             }
-//         });
-//     });
-// }
-//
-// handTrack.load(modelParams).then(lmodel => {
-//     model = lmodel;
-// });
+$("#videoGesture").click(function() {
+    $("#video").removeClass("hide");
+    /* Hand gestures */
+    const modelParams = {
+        flipHorizontal: false,
+        outputStride: 16,
+        imageScaleFactor: 1,
+        maxNumBoxes: 20,
+        iouThreshold: 0.2,
+        scoreThreshold: 0.7,
+        modelType: "ssd320fpnlite",
+        modelSize: "large",
+        bboxLineWidth: "2",
+        fontSize: 17,
+    }
+
+    const video = document.querySelector('#video');
+
+    let model;
+
+    navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia;
+
+    handTrack.startVideo(video).then(status => {
+        if (status) {
+            navigator.getUserMedia({ video: {} }, stream => {
+                    video.sourceObject = stream;
+                    setInterval(runDetection, 1000);
+                },
+                err => console.log(err)
+            );
+        }
+    });
+
+    function runDetection() {
+        model.detect(video).then(predictions => {
+            console.log(predictions);
+            predictions.forEach((p) => {
+                if (p.label == "closed") {
+                    scene.translateZ(1);
+                }
+
+                if (p.label == "open") {
+                    scene.translateY(-1);
+                }
+
+                if (p.label == "point") {
+                    scene.translateY(1);
+                }
+            });
+        });
+    }
+
+    handTrack.load(modelParams).then(lmodel => {
+        model = lmodel;
+    });
+});
