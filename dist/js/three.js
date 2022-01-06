@@ -8,12 +8,15 @@ var statusRightDoor = false;
 var statusUpperDoor = false;
 var statusLeg = false;
 
+/* Array that contains all the pickable meshes in the scene */
+var pickableMeshes = [];
+
 init();
 animate();
 
 function init() {
-    camera = new THREE.PerspectiveCamera(70, 1280 / 960, 0.1, 500);
-    camera.position.set(-3.75, 4, 13.75);
+    camera = new THREE.PerspectiveCamera(60, 1.475, 0.1, 200);
+    camera.position.set(-3.75, 4, 11.75);
     camera.lookAt(0, 0, 0);
 
     scene = new THREE.Scene();
@@ -40,6 +43,12 @@ function init() {
             wood = $(gltfScene.children).filter(function () {
                 return this.name != "stoneBench";
             });
+
+            gltfScene.traverse((node) => {
+                if (node instanceof THREE.Mesh && node.name != "workBench") {
+                    pickableMeshes.push(node);
+                }
+            });
         }
         );
 
@@ -57,7 +66,7 @@ function init() {
     renderer = new THREE.WebGLRenderer({ canvas: product3DCanvas, antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(800, 600);
-    renderer.setViewport(0, -80, 800, 600);
+    renderer.setViewport(0, 30, 800, 600);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
     renderer.outputEncoding = THREE.sRGBEncoding;
@@ -76,8 +85,6 @@ function init() {
 
     controls.minDistance = 10;
     controls.maxDistance = 20;
-
-    controls.target.set(0, 0.35, 0);
 
     controlsTrack = new THREE.TrackballControls(camera, renderer.domElement);
     controlsTrack.noZoom = false;
@@ -106,7 +113,22 @@ function init() {
 
     scene.add(pl_left, pl_right, pl_left_inv, pl_right_inv, pl_inside);
 
+    raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
 
+    window.onclick = function(e) {
+        let canvasBounds = canvas.getBoundingClientRect();
+        mouse.x = ((e.clientX - canvasBounds.left) / (canvasBounds.right - canvasBounds.left)) * 2 - 1;
+        mouse.y = -((event.clientY - canvasBounds.top) / (canvasBounds.bottom - canvasBounds.top)) * 2 + 1;
+        getObjects();
+    }
+
+    window.addEventListener("mousemove", function( e ) {
+        let canvasBounds = canvas.getBoundingClientRect();
+        mouse.x = ((e.clientX - canvasBounds.left) / (canvasBounds.right - canvasBounds.left)) * 2 - 1;
+        mouse.y = -((event.clientY - canvasBounds.top) / (canvasBounds.bottom - canvasBounds.top)) * 2 + 1;
+        hoverObjects();
+    });
 }
 
 function animate() {
@@ -126,25 +148,34 @@ function render() {
     renderer.render(scene, camera);
 }
 
-/* Open Door */
-function openDoor(clip) {
-    doorAnimation = mixer.clipAction(clip);
-    doorAnimation.reset();
-    doorAnimation.timeScale = 1;
-    doorAnimation.setLoop(THREE.LoopOnce);
-    doorAnimation.clampWhenFinished = true;
-    doorAnimation.play();
+/* Animate object on click */
+function getObjects() {
+    raycaster.setFromCamera( mouse, camera );
+    const intersectedObjects = raycaster.intersectObjects( pickableMeshes, false );
+    if (intersectedObjects.length > 0) {
+        if (intersectedObjects[0].object.name == "door") {
+            if (!statusLeftDoor) {
+                openDoor(clipLeftDoor);
+                statusLeftDoor = true;
+            } else {
+                closeDoor(clipLeftDoor);
+                statusLeftDoor = false;
+            }
+        }
+        console.log( intersectedObjects[0] );
+    }
 }
 
-/* Close Door */
-function closeDoor(clip) {
-    doorAnimation = mixer.clipAction(clip);
-    doorAnimation.paused = false;
-    doorAnimation.timeScale = -1;
-    doorAnimation.setLoop(THREE.LoopOnce);
-    doorAnimation.play();
+function hoverObjects() {
+    raycaster.setFromCamera( mouse, camera );
+    const intersectedObjects = raycaster.intersectObjects( pickableMeshes, false );
+    if (intersectedObjects.length > 0) {
+        var pickedObject = intersectedObjects[0].object;
+        
+    }
 }
 
+/* Change texture of the objects */
 $("li[color='m-claro']").click(function () {
     t_marble1 = prepareTexture(t_marble1);
     stoneBench[0].material.map = t_marble1;
@@ -198,6 +229,25 @@ function prepareTexture(texture) {
 function changeActive(e) {
     $(".options-list").find("li.li-active").removeClass("li-active");
     $(e).addClass("li-active");
+}
+
+/* Open Door */
+function openDoor(clip) {
+    doorAnimation = mixer.clipAction(clip);
+    doorAnimation.reset();
+    doorAnimation.timeScale = 1;
+    doorAnimation.setLoop(THREE.LoopOnce);
+    doorAnimation.clampWhenFinished = true;
+    doorAnimation.play();
+}
+
+/* Close Door */
+function closeDoor(clip) {
+    doorAnimation = mixer.clipAction(clip);
+    doorAnimation.paused = false;
+    doorAnimation.timeScale = -1;
+    doorAnimation.setLoop(THREE.LoopOnce);
+    doorAnimation.play();
 }
 
 /* Animation to open/close left door */

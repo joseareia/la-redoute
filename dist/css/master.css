@@ -1018,6 +1018,10 @@ video#video {
     opacity: .8;
 }
 
+video#video.hide {
+    display: none;
+}
+
 .options.smol-pic ul {
     padding: 0;
     margin: 0;
