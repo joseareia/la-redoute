@@ -1,9 +1,9 @@
-import 'bootstrap';
-import './scss/app.scss';
-
+window.$ = require('jquery');
 window.THREE = require('three');
 window.barba = require('@barba/core');
-window.$ = require('jquery');
+
+import 'bootstrap';
+import './scss/app.scss';
 
 require('three/OrbitControls');
 require('three/TrackballControls');
