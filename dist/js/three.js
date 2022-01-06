@@ -116,14 +116,14 @@ function init() {
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
 
-    window.onclick = function(e) {
+    window.onclick = function (e) {
         let canvasBounds = canvas.getBoundingClientRect();
         mouse.x = ((e.clientX - canvasBounds.left) / (canvasBounds.right - canvasBounds.left)) * 2 - 1;
         mouse.y = -((event.clientY - canvasBounds.top) / (canvasBounds.bottom - canvasBounds.top)) * 2 + 1;
         getObjects();
     }
 
-    window.addEventListener("mousemove", function( e ) {
+    window.addEventListener("mousemove", function (e) {
         let canvasBounds = canvas.getBoundingClientRect();
         mouse.x = ((e.clientX - canvasBounds.left) / (canvasBounds.right - canvasBounds.left)) * 2 - 1;
         mouse.y = -((event.clientY - canvasBounds.top) / (canvasBounds.bottom - canvasBounds.top)) * 2 + 1;
@@ -150,8 +150,8 @@ function render() {
 
 /* Animate object on click */
 function getObjects() {
-    raycaster.setFromCamera( mouse, camera );
-    const intersectedObjects = raycaster.intersectObjects( pickableMeshes, false );
+    raycaster.setFromCamera(mouse, camera);
+    const intersectedObjects = raycaster.intersectObjects(pickableMeshes, false);
     if (intersectedObjects.length > 0) {
         if (intersectedObjects[0].object.name == "door") {
             if (!statusLeftDoor) {
@@ -162,16 +162,16 @@ function getObjects() {
                 statusLeftDoor = false;
             }
         }
-        console.log( intersectedObjects[0] );
+        console.log(intersectedObjects[0]);
     }
 }
 
 function hoverObjects() {
-    raycaster.setFromCamera( mouse, camera );
-    const intersectedObjects = raycaster.intersectObjects( pickableMeshes, false );
+    raycaster.setFromCamera(mouse, camera);
+    const intersectedObjects = raycaster.intersectObjects(pickableMeshes, false);
     if (intersectedObjects.length > 0) {
         var pickedObject = intersectedObjects[0].object;
-        
+
     }
 }
 
@@ -255,12 +255,12 @@ $("#leftDoor").click(function () {
     if (!statusLeftDoor) {
         openDoor(clipLeftDoor);
         statusLeftDoor = true;
+        document.getElementById("leftDoor").checked = true;
     } else {
         closeDoor(clipLeftDoor);
         statusLeftDoor = false;
+        document.getElementById("leftDoor").checked = false;
     }
-    if (this.innerHTML == "Porta esquerda - Abrir") this.innerHTML = "Porta esquerda - Fechar";
-    else this.innerHTML = "Porta esquerda - Abrir";
 });
 
 /* Animation to open/close right door */
@@ -268,12 +268,12 @@ $("#rightDoor").click(function () {
     if (!statusRightDoor) {
         openDoor(clipRightDoor);
         statusRightDoor = true;
+        document.getElementById("rightDoor").checked = true;
     } else {
         closeDoor(clipRightDoor);
         statusRightDoor = false;
+        document.getElementById("rightDoor").checked = false;
     }
-    if (this.innerHTML == "Porta direita - Abrir") this.innerHTML = "Porta direita - Fechar";
-    else this.innerHTML = "Porta direita - Abrir";
 });
 /* Animation to open/close both doors */
 $("#bothDoors").click(function () {
@@ -282,24 +282,17 @@ $("#bothDoors").click(function () {
         openDoor(clipLeftDoor);
         statusRightDoor = true;
         statusLeftDoor = true;
+        document.getElementById("bothDoors").checked = true;
+        document.getElementById("leftDoor").checked = true;
+        document.getElementById("rightDoor").checked = true;
     } else {
         closeDoor(clipRightDoor);
         closeDoor(clipLeftDoor);
         statusRightDoor = false;
         statusLeftDoor = false;
-    }
-
-    var btnLeftDoor = document.getElementById("leftDoor")
-    var btnRightDoor = document.getElementById("rightDoor")
-    if (this.innerHTML == "Ambas Portas - Fechar") {
-        this.innerHTML = "Ambas Portas - Abrir";
-        btnLeftDoor.innerHTML = "Porta esquerda - Abrir"
-        btnRightDoor.innerHTML = "Porta direita - Abrir"
-    }
-    else {
-        this.innerHTML = "Ambas Portas - Fechar";
-        btnLeftDoor.innerHTML = "Porta esquerda - Fechar"
-        btnRightDoor.innerHTML = "Porta direita - Fechar"
+        document.getElementById("bothDoors").checked = false;
+        document.getElementById("leftDoor").checked = false;
+        document.getElementById("rightDoor").checked = false;
     }
 });
 
@@ -310,14 +303,14 @@ $("#upperDoor").click(function () {
         openDoor(clipUpperDoorLeg);
         statusUpperDoor = true;
         statusLeg = true;
+        document.getElementById("upperDoor").checked = true;
     } else {
         closeDoor(clipUpperDoorLeg);
         closeDoor(clipUpperDoor);
         statusUpperDoor = false;
         statusLeg = false;
+        document.getElementById("upperDoor").checked = false;
     }
-    if (this.innerHTML == "Apoio de Cima - Fechar") this.innerHTML = "Apoio de Cima - Abrir";
-    else this.innerHTML = "Apoio de Cima - Fechar";
 });
 
 /* Gets the image uploaded */
