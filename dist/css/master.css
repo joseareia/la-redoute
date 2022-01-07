@@ -508,6 +508,9 @@ button[name="read-more"]:hover {
     font-size: 18px;
     top: 25%;
     margin-bottom: 0;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 #click-collect {

@@ -358,7 +358,7 @@
                     <canvas id="product3DCanvas"></canvas>
                 </div>
                 <div class="col-4">
-                    <div class="d-flex flex-row-reverse videoG" id="videoGesture">
+                    <div class="d-flex flex-row-reverse videoG" id="videoGesture" data-bs-toggle="modal" data-bs-target="#gestureModal">
                         <div class="videoGCircle text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="ai ai-Hand"><path d="M20 16V8.5c0-.828-.641-1.5-1.48-1.5C18 7 17 7.3 17 8.5v-3c0-.828-.641-1.5-1.48-1.5-.507 0-1.52.3-1.52 1.5v-2c0-.828-.641-1.5-1.48-1.5-.84 0-1.52.672-1.52 1.5v2C11 4.3 10.007 4 9.5 4 8.66 4 8 4.691 8 5.52V14"/><path d="M11 5.5V11"/><path d="M14 5.5V11"/><path d="M17 5.5V11"/><path d="M20 16c0 4-3.134 6-7 6s-5.196-1-8.196-6l-1.571-2.605c-.536-.868-.107-1.994.881-2.314a1.657 1.657 0 0 1 1.818.552L8 14.033"/></svg>
                         </div>
@@ -1159,6 +1159,36 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
                     <button type="button" class="btn text-white fw-bold" data-bs-dismiss="modal"
+                        style="background-color:rgba(194, 167, 140, .8)!important;">Vamos experimentar!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="gestureModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="gestureModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gestureModalLabel">Movimente o objecto com os seus gestos!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Para movimentar o objecto com os seus gestos é necessário que autorize a utilização da sua webcam.
+                    Abaixo estão descritos os gestos atualmente disponíveis para a interação com o objeto 3D.
+                    <br>
+                    <ul class="mb-2 mt-2">
+                        <li><span style="font-weight:600;">Rodar (Sentido ponteiros do relógio)</span>: <i>Pinch</i> (Polegar e indicar juntos). </li>
+                        <li><span style="font-weight:600;">Rodar (Sentido contrário aos ponteiros do relógio)</span>: Mão aberta.</li>
+                        <li><span style="font-weight:600;">Mover para cima</span>: Apontar para cima com a sua mão (Indicador levantado). </li>
+                        <li><span style="font-weight:600;">Mover para baixo</span>: Mão fechada.</li>
+                    </ul>
+                    <span> <b>Aviso:</b> Apenas utilize um gesto de cada vez. </span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn text-white fw-bold" id="okVideoGesture" data-bs-dismiss="modal"
                         style="background-color:rgba(194, 167, 140, .8)!important;">Vamos experimentar!</button>
                 </div>
             </div>
